@@ -13,9 +13,16 @@
 ################################################################
 
 ################################################################
+# Modules                                                      #
+################################################################
+import os
+
+################################################################
 # Variables, Constants                                         #
 ################################################################
 MAX_SIZE_OF_Matrix = 10
+
+storedMatrices = dict()
 
 ################################################################
 # Matrix Class                                                 #
@@ -139,7 +146,27 @@ class MatrixClass:
                     return False
         
         return True # if everthing is identical, "True" will be returned 
-                    
+
+################################################################
+# Functions                                                    #
+################################################################
+
+#========================InputMatrix===========================#
+def input_matrix():
+    pass
+
+#=====================changeMatrixName=========================#
+def change_matrix_name():
+    pass
+
+#=========================showMatrix===========================#
+def show_matrix():
+    pass
+
+#===================changeMatrixValue===========================#
+def change_matrix_value():
+    pass
+
 ################################################################
 # Main Programm                                                #
 ################################################################
@@ -149,23 +176,16 @@ for i in range(A.get_rows()):
     for j in range(A.get_columns()):
         A.set_value(i+1, j+1, i*A.get_rows() + j)
 
-print(f"A =\n{A}")
-
 B = MatrixClass(3, 3)
 
 for i in range(B.get_rows()):
     for j in range(B.get_columns()):
         B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
 
-print(f"B =\n{B}")
 
-C = A * B
+storedMatrices["matA"] = A
 
-print(f"C = {C}")
+storedMatrices["matB"] = B
 
+print(storedMatrices.get("matB"))
 #=========================SubCaption===========================#
-
-
-################################################################
-# Functions                                                    #
-################################################################
