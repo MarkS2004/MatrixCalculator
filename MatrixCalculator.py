@@ -24,21 +24,21 @@ class MatrixClass:
 
 #=========================Constructor==========================#
     def __init__(self, rows, columns):
-        if not type(rows) is int: # check if rows  are intergers
+        if not type(rows) is int: # check if rows is interger
             raise TypeError("rows must be integers")
         
-        if not type (columns) is int: # check if columns are intergers
-            raise TypeError("rcolumns must be integers")
+        if not type (columns) is int: # check if columns is interger
+            raise TypeError("columns must be integers")
         
-        if rows < 1 or rows > MAX_SIZE_OF_Matrix: # check if 1 <= rows <= Max size
+        if rows < 1 or rows > MAX_SIZE_OF_Matrix: # check if 1 <= rows <= max size
             raise ValueError(f"rows must be between 1 and {MAX_SIZE_OF_Matrix}")
         
-        if columns < 1 or columns > MAX_SIZE_OF_Matrix: # check if 1 <= columns <= Max size
+        if columns < 1 or columns > MAX_SIZE_OF_Matrix: # check if 1 <= columns <= max size
             raise ValueError(f"columns must be between 1 and {MAX_SIZE_OF_Matrix}")
         
         self._rows, self._columns = rows, columns 
 
-        self._matrix = [[0]*self._columns]*self._rows
+        self._matrix = [[0 for i in range(self._columns)] for j in range(self._rows)] # create 2d Array
 
 #==========================Getters=============================#
     def get_value(self, row, column): return self._matrix[row-1][column-1]
@@ -49,7 +49,20 @@ class MatrixClass:
 
 #==========================Setter==============================#
     def set_value(self, row, column, value):
-        pass
+        if (not type(value) is int) and (not type(value) is float): # check if value is integer or float
+            raise TypeError("value must be integer or float")
+        
+        if (not type(row) is int) or (not type(column) is int): # check if row and column is integer
+            raise TypeError("row and column must be integer")
+        
+        if row < 1 or row > self._rows:
+            raise ValueError(f"row must be between 1 and {self._rows}") # check if 1 <= row <= number of rows
+                
+        if column < 1 or column > self._columns:
+            raise ValueError(f"column must be between 1 and {self._columns}") # check if 1 <= column <= number of columns
+        
+        self._matrix[row-1][column-1] = value
+
 #=====================StringRepresentation=====================#
     def __str__(self):
         outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix
@@ -86,8 +99,8 @@ class MatrixClass:
 # Main Programm                                                #
 ################################################################
 
-A = MatrixClass(10, 1)
-
+A = MatrixClass(3, 3)
+A.set_value(3,2,1.5)
 print(A)
 #=========================SubCaption====================f=======#
 
