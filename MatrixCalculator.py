@@ -126,10 +126,22 @@ class MatrixClass:
 ################################################################
 # Main Programm                                                #
 ################################################################
-
 A = MatrixClass(3, 3)
-A.set_value(3,2,1.5)
-print(A)
+
+for i in range(A.get_rows()):
+    for j in range(A.get_columns()):
+        A.set_value(i+1, j+1, i*A.get_rows() + j)
+
+print(f"A =\n{A}")
+
+B = MatrixClass(3, 3)
+
+for i in range(B.get_rows()):
+    for j in range(B.get_columns()):
+        B.set_value(i+1, j+1, i*B.get_rows() + j)
+
+print(f"B =\n{B}")
+
 #=========================SubCaption====================f=======#
 
 
