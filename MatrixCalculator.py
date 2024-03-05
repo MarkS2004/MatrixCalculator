@@ -15,6 +15,7 @@
 ################################################################
 # Variables, Constants                                         #
 ################################################################
+MAX_SIZE_OF_Matrix = 10
 
 ################################################################
 # Matrix Class                                                 #
@@ -23,9 +24,21 @@ class MatrixClass:
 
 #=========================Constructor==========================#
     def __init__(self, rows, columns):
-        self._rows, self._columns = rows, columns
+        if not type(rows) is int: # check if rows is interger
+            raise TypeError("rows must be integers")
+        
+        if not type (columns) is int: # check if columns is interger
+            raise TypeError("columns must be integers")
+        
+        if rows < 1 or rows > MAX_SIZE_OF_Matrix: # check if 1 <= rows <= max size
+            raise ValueError(f"rows must be between 1 and {MAX_SIZE_OF_Matrix}")
+        
+        if columns < 1 or columns > MAX_SIZE_OF_Matrix: # check if 1 <= columns <= max size
+            raise ValueError(f"columns must be between 1 and {MAX_SIZE_OF_Matrix}")
+        
+        self._rows, self._columns = rows, columns 
 
-        self._matrix = [[0]*self._columns]*self._rows
+        self._matrix = [[0 for i in range(self._columns)] for j in range(self._rows)] # create 2d Array
 
 #==========================Getters=============================#
     def get_value(self, row, column): return self._matrix[row-1][column-1]
@@ -34,9 +47,22 @@ class MatrixClass:
 
     def get_rows(self): return self._rows
 
-#==========================Setters=============================#
+#==========================Setter==============================#
     def set_value(self, row, column, value):
-        pass
+        if (not type(value) is int) and (not type(value) is float): # check if value is integer or float
+            raise TypeError("value must be integer or float")
+        
+        if (not type(row) is int) or (not type(column) is int): # check if row and column is integer
+            raise TypeError("row and column must be integer")
+        
+        if row < 1 or row > self._rows:
+            raise ValueError(f"row must be between 1 and {self._rows}") # check if 1 <= row <= number of rows
+                
+        if column < 1 or column > self._columns:
+            raise ValueError(f"column must be between 1 and {self._columns}") # check if 1 <= column <= number of columns
+        
+        self._matrix[row-1][column-1] = value
+
 #=====================StringRepresentation=====================#
     def __str__(self):
         outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix
@@ -53,7 +79,7 @@ class MatrixClass:
 
         return outputString
         
-#=========================AddMethode===========================#
+#=========================AddMethod============================#
     def __add__(self, other):
 
         if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
@@ -64,10 +90,10 @@ class MatrixClass:
                     return self
 
         else:
-            raise ValueError ("The Matrices are not the same size! They can not be added!") # ValueErrror message
+            raise ValueError("The Matrices are not the same size! They can not be added!") # ValueError message
 
     
-#=========================SubMethode===========================#
+#=========================SubMethod============================#
     def __sub__(self, other):
         
         if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
@@ -99,14 +125,25 @@ class MatrixClass:
         else:
             raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
 
-#==========================EqMethode====================v=======#
+#==========================EqMethod============================#
     def __eq__(self, other):
-        pass
-
+        if self._rows != other._rows and self._columns != other._columns:       # Checks if matrices are not the same size
+            return False
+        
+        for i in range(self._rows):                                             # Goes throw the rows of the Matrices  
+            for j in range(self._columns):                                      # Goes throw the columns of the Matrices
+                if self._matrix[i][j] != other._matrix[i][j]:                   # Checks if the differnt variables in the matrices are not the same  
+                    return False
+        
+        return True                                                             # If there erverthing is identical "True" will be returned 
+                    
 ################################################################
 # Main Programm                                                #
 ################################################################
 
+A = MatrixClass(10,10)
+
+print(A.get_rows())
 #=========================SubCaption===========================#
 
 ################################################################
