@@ -78,7 +78,7 @@ class MatrixClass:
                     return self
                 
          else:
-            raise ValueError ("The Matrices are not the same size! They can not be subtracted!") # ValueErrror message
+            raise ValueError("The Matrices are not the same size! They can not be subtracted!") # ValueErrror message
 
 
 #=========================MulMethode===========================#
