@@ -82,13 +82,13 @@ class MatrixClass:
 #=========================AddMethod============================#
     def __add__(self, other):
 
-        if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
+        if self._rows == other._rows and self._columns == other._columns: # checks if matrices are the same size
 
             result = MatrixClass(self._rows, self._columns)
 
-            for i in range (self._rows):                                        # Goes thru the rows of the matrices  
-                for j in range (self._columns):                                 # Goes thru the columns of the matrices
-                    result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j]                   # adds the matrices
+            for i in range (self._rows): # goes thru the rows of the matrices  
+                for j in range (self._columns): # goes thru the columns of the matrices
+                    result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j] # adds the matrices
 
             return result
 
@@ -98,13 +98,13 @@ class MatrixClass:
 #=========================SubMethod============================#
     def __sub__(self, other):
         
-        if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
+        if self._rows == other._rows and self._columns == other._columns: # Checks if matrices are the same size
 
             result = MatrixClass(self._rows, self._columns)
 
-            for i in range (self._rows):                                        # Goes thru the rows of the matrices  
-                for j in range (self._columns):                                 # Goes thru the columns of the matrices
-                    result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j]                   # Substracts the matrices
+            for i in range (self._rows): # Goes thru the rows of the matrices  
+                for j in range (self._columns): # Goes thru the columns of the matrices
+                    result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j] # Substracts the matrices
 
             return result
                 
@@ -116,12 +116,12 @@ class MatrixClass:
 
         if self._rows == other._columns and self._columns == other._rows:
              
-            result = MatrixClass(self._rows, other._columns)    # Initialize result matrix
+            result = MatrixClass(self._rows, other._columns) # Initialize result matrix
 
-            for i in range (self._rows):                                                              # Goes thru the rows of selfmatrix  
-                for j in range (other._columns):                                                      # Goes thru the columns of othermatrix
-                    for k in range (self._columns):                                                   # Goes thru the columns of selfmatrix
-                        result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j])            # multiplicates the matrices
+            for i in range (self._rows): # Goes thru the rows of the matrices 
+                for j in range (other._columns): # Goes thru the columns of the matrices
+                    for k in range (self._columns): # Goes thru the columns of the matrices
+                        result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j]) # multiplicates the matrices
                     
             return result
                 
@@ -130,15 +130,15 @@ class MatrixClass:
 
 #==========================EqMethod============================#
     def __eq__(self, other):
-        if self._rows != other._rows and self._columns != other._columns:       # Checks if matrices are not the same size
+        if self._rows != other._rows and self._columns != other._columns: # Checks if matrices are not the same size
             return False
         
-        for i in range(self._rows):                                             # Goes thru the rows of the Matrices  
-            for j in range(self._columns):                                      # Goes thru the columns of the Matrices
-                if self._matrix[i][j] != other._matrix[i][j]:                   # Checks if the different elements in the matrices are not the same  
+        for i in range(self._rows): # Goes thru the rows of the Matrices  
+            for j in range(self._columns): # Goes thru the columns of the Matrices
+                if self._matrix[i][j] != other._matrix[i][j]: # Checks if the different elements in the matrices are not the same  
                     return False
         
-        return True                                                             # If everthing is identical, "True" will be returned 
+        return True # If everthing is identical, "True" will be returned 
                     
 ################################################################
 # Main Programm                                                #
