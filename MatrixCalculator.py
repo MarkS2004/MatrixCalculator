@@ -164,8 +164,32 @@ def show_matrix():
     pass
 
 #===================changeMatrixValue===========================#
-def change_matrix_value():
-    pass
+def change_matrix_value(): 
+    choice = input("In welcher Martix soll ein Wert geändert werden?\n") # user input matrix name
+    if str(storedMatrices.get(choice)) == "None": # compare if entered matrix name excists in the library
+        print("Die Matrix existiert nicht") 
+        input()
+        return
+    
+    tempMat = storedMatrices.get(choice) # temporary matrix is created and selected matrix which is inserted
+    
+    row = int(input("In welcher Zeile der Martix soll ein Wert geändert werden?\n")) # user input matrix row
+
+    if row < 1 or row > tempMat.get_rows(): # if row is lower than 1 or select row is larger than given row
+        print("Die Matrix besitzt nicht so viele Zeilen") 
+        input()
+        return
+    
+    column = int(input("In welcher Spalte der Martix soll ein Wert geändert werden?\n")) # user input matrix column
+    if column < 1 or column > tempMat.get_columns(): # if column is lower than 1 or select column is larger than given column
+        print("Die Matrix besitzt nicht so viele Spalten")
+        input()
+        return
+    
+    value = int(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
+    
+    storedMatrices.get(choice).set_value(row,column,value) # library matrix is overwritten with the new value
+
 
 ################################################################
 # Main Programm                                                #
@@ -187,5 +211,8 @@ storedMatrices["matA"] = A
 
 storedMatrices["matB"] = B
 
-print(storedMatrices.get("matB"))
+print(storedMatrices.get("matA"))
+change_matrix_value()
+print(storedMatrices.get("matA"))
+input()
 #=========================SubCaption===========================#
