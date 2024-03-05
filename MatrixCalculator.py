@@ -67,7 +67,7 @@ class MatrixClass:
             raise ValueError ("The Matrices are not the same size! They can not be added!") # ValueErrror message
 
     
-#=========================SubMethode===========================#
+#=========================SubMethod============================#
     def __sub__(self, other):
         
          if self._rows == other._rows and self._columns == other._columns:      # Checks if matrices are the same size
