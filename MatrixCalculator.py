@@ -96,20 +96,33 @@ class MatrixClass:
 #=========================SubMethod============================#
     def __sub__(self, other):
         
-         if self._rows == other._rows and self._columns == other._columns:      # Checks if matrices are the same size
+        if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
             for i in range (self._rows):                                        # Goes throw the rows of the matrices  
                 for j in range (self._columns):                                 # Goes throw the columns of the matrices
                     self._matrix[i][j] -= other._matrix[i][j]                   # Substracted the matrices
 
                     return self
                 
-         else:
-            raise ValueError("The Matrices are not the same size! They can not be subtracted!") # ValueError message
+        else:
+            raise ValueError("The Matrices are not the same size! They can not be subtracted!") # ValueErrror message
 
 
-#=========================MulMethod============================#
+#==========================MulMethod===========================#
     def __mul__(self, other):
-        pass
+
+        if self._rows == other._columns and self._columns == other._rows:                               # Checks conditions
+             
+             result = MatrixClass(self._rows, other._columns)    # Initialize result matrix
+
+             for i in range (self._rows):                                                             # Goes throw the rows of selfmatrix  
+                for j in range (other._columns):                                                      # Goes throw the columns of othermatrix
+                    for k in range (self._columns):                                                   # Goes throw
+                        result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j])            # Mutiplicated the matrices
+                    
+                    return result
+                
+        else:
+            raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
 
 #==========================EqMethod============================#
     def __eq__(self, other):
@@ -126,11 +139,21 @@ class MatrixClass:
 ################################################################
 # Main Programm                                                #
 ################################################################
-
 A = MatrixClass(3, 3)
+
+for i in range(A.get_rows()):
+    for j in range(A.get_columns()):
+        A.set_value(i+1, j+1, i*A.get_rows() + j)
+
+print(f"A =\n{A}")
+
 B = MatrixClass(3, 3)
 
+for i in range(B.get_rows()):
+    for j in range(B.get_columns()):
+        B.set_value(i+1, j+1, i*B.get_rows() + j)
 
+print(f"B =\n{B}")
 
 #=========================SubCaption====================f=======#
 
