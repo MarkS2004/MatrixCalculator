@@ -53,7 +53,7 @@ class MatrixClass:
 
         return outputString
         
-#=========================AddMethode===========================#
+#=========================AddMethod============================#
     def __add__(self, other):
 
         if self._rows == other._rows and self._columns == other._columns:       # Checks if Matrices are the same size
@@ -64,29 +64,37 @@ class MatrixClass:
                     return self
 
         else:
-            raise ValueError ("The Matrices are not the same size! They can not be added!") # Errror message
+            raise ValueError ("The Matrices are not the same size! They can not be added!") # Errror message   
 
-    
-
-#=========================SubMethode===========================#
+#=========================SubMethod============================#
     def __sub__(self, other):
         pass
 
-#=========================MulMethode===========================#
+#=========================MulMethod============================#
     def __mul__(self, other):
         pass
 
-#==========================EqMethode===========================#
+#==========================EqMethod============================#
     def __eq__(self, other):
-        pass
-
+        if self._rows != other._rows and self._columns != other._columns:       # Checks if Matrices are not the same size
+            return False
+        
+        for i in range(self._rows):                                             # Goes throw the rows of the Matrices  
+            for j in range(self._columns):                                      # Goes throw the columns of the Matrices
+                if self._matrix[i][j] != other._matrix[i][j]:                   # Checks if the differnt variables in the matrices are not the same  
+                    return False
+        
+        return True                                                             # If there erverthing is identical "True" will be returned 
+                    
 ################################################################
 # Main Programm                                                #
 ################################################################
 
-A = MatrixClass(10,10)
+A = MatrixClass(3,3)
+B = MatrixClass(3,3)
+C = A + B
 
-print(A.get_rows())
+print(C)
 #=========================SubCaption===========================#
 
 ################################################################
