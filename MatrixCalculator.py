@@ -64,7 +64,7 @@ class MatrixClass:
                     return self
 
         else:
-            raise ValueError ("The Matrices are not the same size! They can not be added!") # ValueErrror message
+            raise ValueError("The Matrices are not the same size! They can not be added!") # ValueError message
 
     
 #=========================SubMethod============================#
@@ -78,7 +78,7 @@ class MatrixClass:
                     return self
                 
          else:
-            raise ValueError("The Matrices are not the same size! They can not be subtracted!") # ValueErrror message
+            raise ValueError("The Matrices are not the same size! They can not be subtracted!") # ValueError message
 
 
 #=========================MulMethod============================#
@@ -87,7 +87,7 @@ class MatrixClass:
 
 #==========================EqMethod============================#
     def __eq__(self, other):
-        if self._rows != other._rows and self._columns != other._columns:       # Checks if Matrices are not the same size
+        if self._rows != other._rows and self._columns != other._columns:       # Checks if matrices are not the same size
             return False
         
         for i in range(self._rows):                                             # Goes throw the rows of the Matrices  
