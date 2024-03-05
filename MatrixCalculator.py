@@ -29,7 +29,7 @@ class MatrixClass:
 
 #===========================Getter=============================#
     @property
-    def matrix(self, row, column):
+    def matrix(self, row, column): 
         pass
 
 #===========================Setter=============================#
@@ -39,7 +39,19 @@ class MatrixClass:
 
 #=====================StringRepresentation=====================#
     def __str__(self):
-        pass
+        outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix
+
+        for i in range(self._rows):
+            outputString += "\t│" # left part of matrix
+
+            for j in range(self._columns):
+                outputString += f"\t{self._matrix[i][j]}" # field with elements
+
+            outputString += "\t│\n" # right part of matrix
+
+        outputString += "\t└" + "\t"*(self._columns + 1) + "┘"  # lower part of matrix
+
+        return outputString
         
 #=========================AddMethode===========================#
     def __add__(self, other):
@@ -61,6 +73,10 @@ class MatrixClass:
 # Main Programm                                                #
 ################################################################
 
+A = MatrixClass(10,10)
+
+print(A)
+print(A)
 #=========================SubCaption===========================#
 
 
