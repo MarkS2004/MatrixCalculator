@@ -27,19 +27,31 @@ class MatrixClass:
 
         self._matrix = [[0]*self._columns]*self._rows
 
-#===========================Getter=============================#
-    @property
-    def matrix(self, row, column):
-        pass
+#==========================Getters=============================#
+    def get_value(self, row, column): return self._matrix[row-1][column-1]
+    
+    def get_columns(self): return self._columns
 
-#===========================Setter=============================#
-    @matrix.setter
-    def matrix(self, row, column, value):
-        pass
+    def get_rows(self): return self._rows
 
+#==========================Setters=============================#
+    def set_value(self, row, column, value):
+        pass
 #=====================StringRepresentation=====================#
     def __str__(self):
-        pass
+        outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix
+
+        for i in range(self._rows):
+            outputString += "\t│" # left part of matrix
+
+            for j in range(self._columns):
+                outputString += f"\t{self._matrix[i][j]}" # field with elements
+
+            outputString += "\t│\n" # right part of matrix
+
+        outputString += "\t└" + "\t"*(self._columns + 1) + "┘"  # lower part of matrix
+
+        return outputString
         
 #=========================AddMethode===========================#
     def __add__(self, other):
@@ -72,6 +84,9 @@ class MatrixClass:
 # Main Programm                                                #
 ################################################################
 
+A = MatrixClass(10,10)
+
+print(A.get_rows())
 #=========================SubCaption===========================#
 
 ################################################################
