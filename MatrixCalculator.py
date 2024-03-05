@@ -110,10 +110,9 @@ class MatrixClass:
 #==========================MulMethod===========================#
     def __mul__(self, other):
 
-        if self._rows == other._rows and self._columns == other._columns or\
-        self._columns == other._rows or self._rows == other._columns:                                 # Checks conditions
+        if self._rows == other._columns and self._columns == other._rows:                               # Checks conditions
              
-             result = MatrixClass([[0 for j in range(other._columns)] for i in range(self._rows)])    # Initialize result matrix
+             result = MatrixClass(self._rows, other._columns)    # Initialize result matrix
 
              for i in range (self._rows):                                                             # Goes throw the rows of selfmatrix  
                 for j in range (other._columns):                                                      # Goes throw the columns of othermatrix
@@ -141,9 +140,12 @@ class MatrixClass:
 # Main Programm                                                #
 ################################################################
 
-A = MatrixClass(10,10)
+A = MatrixClass(3,3)
+B = MatrixClass(3,3)
 
-print(A.get_rows())
+C = A * B
+
+print(C)
 #=========================SubCaption===========================#
 
 ################################################################
