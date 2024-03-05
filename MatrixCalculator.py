@@ -19,6 +19,43 @@
 ################################################################
 # Matrix Class                                                 #
 ################################################################
+class MatrixClass:
+
+#=========================Constructor==========================#
+    def __init__(self, rows, columns):
+        self._rows, self._columns = rows, columns
+
+        self._matrix = [[0]*self._columns]*self._rows
+
+#===========================Getter=============================#
+    @property
+    def matrix(self, row, column):
+        pass
+
+#===========================Setter=============================#
+    @matrix.setter
+    def matrix(self, row, column, value):
+        pass
+
+#=====================StringRepresentation=====================#
+    def __str__(self):
+        pass
+        
+#=========================AddMethode===========================#
+    def __add__(self, other):
+        pass
+
+#=========================SubMethode===========================#
+    def __sub__(self, other):
+        pass
+
+#=========================MulMethode===========================#
+    def __mul__(self, other):
+        pass
+
+#==========================EqMethode===========================#
+    def __eq__(self, other):
+        pass
 
 ################################################################
 # Main Programm                                                #
