@@ -15,6 +15,7 @@
 ################################################################
 # Variables, Constants                                         #
 ################################################################
+MAX_SIZE_OF_Matrix = 10
 
 ################################################################
 # Matrix Class                                                 #
@@ -23,7 +24,19 @@ class MatrixClass:
 
 #=========================Constructor==========================#
     def __init__(self, rows, columns):
-        self._rows, self._columns = rows, columns
+        if not type(rows) is int: # check if rows  are intergers
+            raise TypeError("rows must be integers")
+        
+        if not type (columns) is int: # check if columns are intergers
+            raise TypeError("rcolumns must be integers")
+        
+        if rows < 1 or rows > MAX_SIZE_OF_Matrix: # check if 1 <= rows <= Max size
+            raise ValueError(f"rows must be between 1 and {MAX_SIZE_OF_Matrix}")
+        
+        if columns < 1 or columns > MAX_SIZE_OF_Matrix: # check if 1 <= columns <= Max size
+            raise ValueError(f"columns must be between 1 and {MAX_SIZE_OF_Matrix}")
+        
+        self._rows, self._columns = rows, columns 
 
         self._matrix = [[0]*self._columns]*self._rows
 
@@ -34,7 +47,7 @@ class MatrixClass:
 
     def get_rows(self): return self._rows
 
-#==========================Setters=============================#
+#==========================Setter==============================#
     def set_value(self, row, column, value):
         pass
 #=====================StringRepresentation=====================#
@@ -73,10 +86,10 @@ class MatrixClass:
 # Main Programm                                                #
 ################################################################
 
-A = MatrixClass(10,10)
+A = MatrixClass(10, 1)
 
-print(A.get_rows())
-#=========================SubCaption===========================#
+print(A)
+#=========================SubCaption====================f=======#
 
 
 ################################################################
