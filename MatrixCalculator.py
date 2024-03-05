@@ -1,10 +1,10 @@
 ################################################################
-# ___  ___      _   _____       _                              #
-# |  \/  |     | | /  __ \     | |                             #
-# | .  . | __ _| |_| /  \/ __ _| | ___                         #
-# | |\/| |/ _` | __| |    / _` | |/ __|                        #
-# | |  | | (_| | |_| \__/\ (_| | | (__                         #
-# \_|  |_/\__,_|\__|\____/\__,_|_|\___|                        #
+#            ___  ___      _   _____       _                   #
+#            |  \/  |     | | /  __ \     | |                  #
+#            | .  . | __ _| |_| /  \/ __ _| | ___              #
+#            | |\/| |/ _` | __| |    / _` | |/ __|             #
+#            | |  | | (_| | |_| \__/\ (_| | | (__              #
+#            \_|  |_/\__,_|\__|\____/\__,_|_|\___|             #
 ################################################################
 # file name: MatrixCalculator.py                               #
 # date: 05.03.2023                                             #
@@ -83,43 +83,47 @@ class MatrixClass:
     def __add__(self, other):
 
         if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
-            for i in range (self._rows):                                        # Goes throw the rows of the matrices  
-                for j in range (self._columns):                                 # Goes throw the columns of the matrices
-                    self._matrix[i][j] += other._matrix[i][j]                   # added the matrices
 
-                    return self
+            result = MatrixClass(self._rows, self._columns)
+
+            for i in range (self._rows):                                        # Goes thru the rows of the matrices  
+                for j in range (self._columns):                                 # Goes thru the columns of the matrices
+                    result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j]                   # adds the matrices
+
+            return result
 
         else:
             raise ValueError("The Matrices are not the same size! They can not be added!") # ValueError message
 
-    
 #=========================SubMethod============================#
     def __sub__(self, other):
         
         if self._rows == other._rows and self._columns == other._columns:       # Checks if matrices are the same size
-            for i in range (self._rows):                                        # Goes throw the rows of the matrices  
-                for j in range (self._columns):                                 # Goes throw the columns of the matrices
-                    self._matrix[i][j] -= other._matrix[i][j]                   # Substracted the matrices
 
-                    return self
+            result = MatrixClass(self._rows, self._columns)
+
+            for i in range (self._rows):                                        # Goes thru the rows of the matrices  
+                for j in range (self._columns):                                 # Goes thru the columns of the matrices
+                    result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j]                   # Substracts the matrices
+
+            return result
                 
         else:
             raise ValueError("The Matrices are not the same size! They can not be subtracted!") # ValueErrror message
 
-
 #==========================MulMethod===========================#
     def __mul__(self, other):
 
-        if self._rows == other._columns and self._columns == other._rows:                               # Checks conditions
+        if self._rows == other._columns and self._columns == other._rows:
              
-             result = MatrixClass(self._rows, other._columns)    # Initialize result matrix
+            result = MatrixClass(self._rows, other._columns)    # Initialize result matrix
 
-             for i in range (self._rows):                                                             # Goes throw the rows of selfmatrix  
-                for j in range (other._columns):                                                      # Goes throw the columns of othermatrix
-                    for k in range (self._columns):                                                   # Goes throw
-                        result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j])            # Mutiplicated the matrices
+            for i in range (self._rows):                                                              # Goes thru the rows of selfmatrix  
+                for j in range (other._columns):                                                      # Goes thru the columns of othermatrix
+                    for k in range (self._columns):                                                   # Goes thru the columns of selfmatrix
+                        result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j])            # multiplicates the matrices
                     
-                    return result
+            return result
                 
         else:
             raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
@@ -129,12 +133,12 @@ class MatrixClass:
         if self._rows != other._rows and self._columns != other._columns:       # Checks if matrices are not the same size
             return False
         
-        for i in range(self._rows):                                             # Goes throw the rows of the Matrices  
-            for j in range(self._columns):                                      # Goes throw the columns of the Matrices
-                if self._matrix[i][j] != other._matrix[i][j]:                   # Checks if the differnt variables in the matrices are not the same  
+        for i in range(self._rows):                                             # Goes thru the rows of the Matrices  
+            for j in range(self._columns):                                      # Goes thru the columns of the Matrices
+                if self._matrix[i][j] != other._matrix[i][j]:                   # Checks if the different elements in the matrices are not the same  
                     return False
         
-        return True                                                             # If there erverthing is identical "True" will be returned 
+        return True                                                             # If everthing is identical, "True" will be returned 
                     
 ################################################################
 # Main Programm                                                #
@@ -151,11 +155,15 @@ B = MatrixClass(3, 3)
 
 for i in range(B.get_rows()):
     for j in range(B.get_columns()):
-        B.set_value(i+1, j+1, i*B.get_rows() + j)
+        B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
 
 print(f"B =\n{B}")
 
-#=========================SubCaption====================f=======#
+C = A * B
+
+print(f"C = {C}")
+
+#=========================SubCaption===========================#
 
 
 ################################################################
