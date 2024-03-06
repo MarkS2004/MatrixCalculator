@@ -181,7 +181,7 @@ def show_matrix():
     else:
         print("Die eingegebene Matrix existiert nicht")
 
-    input("\nDrücke eine Taste, um zum Menü zurückzukehren") # Waits until user presses a key
+    input("\nDrücke eine Taste, um zum Menü zurückzukehren") # waits until user presses a key
 
 #===================changeMatrixValue===========================#
 def change_matrix_value():
