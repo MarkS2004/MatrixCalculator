@@ -157,7 +157,14 @@ def input_matrix():
 
 #=====================changeMatrixName=========================#
 def change_matrix_name():
-    pass
+    choice = input("Wie heißt die Matrix, bei welcher der Name geändert werden soll?: \n") # input user: name of matrix, which should be changed
+    if str(storedMatrices.get(choice)) == "None":   # check if matrix is in dictonary
+        print("Die Matrix existiert nicht!")
+        input()
+        return  # leave if matrix is not in dictonary
+    
+    name = input("Was ist der neue Name der Matrix?: \n")    # new name of Matrix 
+    storedMatrices[name] = storedMatrices.pop(choice)
 
 #=========================showMatrix===========================#
 def show_matrix():
