@@ -166,8 +166,8 @@ def variable_manager():
 (1) Matrix eingeben\n\
 (2) Matrix anzeigen\n\
 (3) Matrix löschen\n\
-(4) Name der Matrix ändern\n\
-(5) Element der Matrix ändern\n\n\
+(4) Name ändern\n\
+(5) Werte ändern\n\n\
 (0) Zurück zum Hauptmenü ")
     
         match input(): # selction of the differnt Choices to change the matrices 
