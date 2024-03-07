@@ -162,7 +162,9 @@ Drücke Enter um ins Hauptmenü zu kommen.\n")
 def variable_manager():
     while True:
         os.system("cls") # clears screen
-        print(" Was möchtest du machen?\n\n\
+        print("Variablenmanager\n\
+------------------------------------------------------------------------------------------------\n\n\
+Was möchtest du machen?\n\n\
 (1) Matrix eingeben\n\
 (2) Matrix anzeigen\n\
 (3) Matrix löschen\n\
@@ -350,13 +352,14 @@ intro() # das muss mark korrigieren!!
 while True:
     os.system("cls") # clears screen
     # output selection
-    print("Hauptmenü:\n\n\n\
+    print("Hauptmenü\n\
+------------------------------------------------------------------------------------------------\n\n\
 Welche Operationen möchtest du durchführen?\n\n\
 1)  Varianlenmanager (z.B. Matrizen eingeben/anzeigen/löschen, usw.)\n\
 2)  Eigenschaften berechen (z.B. Determinante, Spur)\n\
-3)  Mathematische Grundopperationen (+,-,*)\n\
-4)  Matrix Transponieren\n\
-5)  Inverse Berechnen\n\
+3)  Mathematische Grundoperationen (+,-,*)\n\
+4)  Matrix transponieren\n\
+5)  Inverse berechnen\n\
 6)  Eigenwerte und Eigenvektoren (Max 3x3)\n\n\
 0)  Porgramm schließen\n\n\
 Wähle die Nummer für die gewünschte Operation!\n")
