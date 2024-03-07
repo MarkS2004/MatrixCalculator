@@ -391,6 +391,9 @@ def add_matrix():
         sum = storedMatrices.pop(summand1) + storedMatrices.pop(summand2)
         print(sum)
 
+
+
+
         print("Press Enter to get back!")
         input()
         break
@@ -440,27 +443,6 @@ def eq_matrix():
 ################################################################
 # Main Programm                                                #
 ################################################################
-
-A = MatrixClass(3, 3)
-
-for i in range(A.get_rows()):
-    for j in range(A.get_columns()):
-        A.set_value(i+1, j+1, i*A.get_rows() + j)
-
-B = MatrixClass(3, 3)
-
-for i in range(B.get_rows()):
-    for j in range(B.get_columns()):
-        B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
-
-
-storedMatrices["matA"] = A
-
-storedMatrices["matB"] = B
-
-
-
-
 
 intro() # das muss mark korrigieren!!
 while True:
