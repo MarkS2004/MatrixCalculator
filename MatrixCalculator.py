@@ -366,6 +366,26 @@ def print_created_matrices():
     print("Folgende Matrizen wurden angelegt:")
     for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrices
 
+#-------------------------deleteMatrix-------------------------#
+def delete_matrix():
+    """brief: this function lets the user delet a matrix"""
+
+    while True:
+        os.system("cls") # clears screen
+        print_created_matrices()
+
+        print("\nWelche Matrix möchtest du löschen?")
+        choice = input_not_existing_matrix()
+
+        del storedMatrices[choice] # delets the selected matrix
+
+        os.system("cls") # clears screen
+        print(f"Die Matrix:{choice} wurde erfolgreich gelöscht\n")
+
+        print("\nMöchtes du eine weitere Matrix löschen?(Y/N)") 
+        if input() == "Y": pass # repeats delete_matrix if Y
+        else: return # return to menu
+
 #------------------------ChangeMatrixValue---------------------#
 def change_matrix_value():
     """brief: this fuction lets the user change a given value"""
@@ -411,9 +431,6 @@ def change_matrix_value():
 
 
 
-#=======================deleteMatrix===========================#
-def delete_matrix():
-    pass
 
 #=========================addMatrix============================#
 def add_matrix():
