@@ -135,18 +135,6 @@ class MatrixClass:
         else:
             raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
 
-#==========================EqMethod============================#
-    def __eq__(self, other):
-        if self._rows != other._rows and self._columns != other._columns: # checks if matrices are not the same size
-            return False
-        
-        for i in range(self._rows): # goes through the rows of the Matrices  
-            for j in range(self._columns): # goes through the columns of the Matrices
-                if self._matrix[i][j] != other._matrix[i][j]: # checks if the different elements in the matrices are not the same  
-                    return False
-        
-        return True # if everthing is identical, "True" will be returned 
-
 ################################################################
 # Functions                                                    #
 ################################################################
