@@ -93,8 +93,8 @@ class MatrixClass:
 
             result = MatrixClass(self._rows, self._columns)
 
-            for i in range (self._rows): # goes thru the rows of the matrices  
-                for j in range (self._columns): # goes thru the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the matrices  
+                for j in range (self._columns): # goes through the columns of the matrices
                     result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j] # adds the matrices
 
             return result
@@ -109,8 +109,8 @@ class MatrixClass:
 
             result = MatrixClass(self._rows, self._columns)
 
-            for i in range (self._rows): # goes thru the rows of the matrices  
-                for j in range (self._columns): # goes thru the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the matrices  
+                for j in range (self._columns): # goes through the columns of the matrices
                     result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j] # substracts the matrices
 
             return result
@@ -125,9 +125,9 @@ class MatrixClass:
              
             result = MatrixClass(self._rows, other._columns) # initialize result matrix
 
-            for i in range (self._rows): # goes thru the rows of the matrices 
-                for j in range (other._columns): # goes thru the columns of the matrices
-                    for k in range (self._columns): # goes thru the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the matrices 
+                for j in range (other._columns): # goes through the columns of the matrices
+                    for k in range (self._columns): # goes through the columns of the matrices
                         result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j]) # multiplicates the matrices
                     
             return result
@@ -140,8 +140,8 @@ class MatrixClass:
         if self._rows != other._rows and self._columns != other._columns: # checks if matrices are not the same size
             return False
         
-        for i in range(self._rows): # goes thru the rows of the Matrices  
-            for j in range(self._columns): # goes thru the columns of the Matrices
+        for i in range(self._rows): # goes through the rows of the Matrices  
+            for j in range(self._columns): # goes through the columns of the Matrices
                 if self._matrix[i][j] != other._matrix[i][j]: # checks if the different elements in the matrices are not the same  
                     return False
         
@@ -168,7 +168,20 @@ def change_matrix_name():
 
 #=========================showMatrix===========================#
 def show_matrix():
-    pass
+    os.system("cls") # clears screen
+
+    print("Folgende Matrizen wurden angelegt:")
+    for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrix keys
+
+    choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
+
+    if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
+        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
+
+    else:
+        print("Die eingegebene Matrix existiert nicht")
+
+    input("\nDrücke eine Taste, um zum Menü zurückzukehren") # Waits until user presses a key
 
 #===================changeMatrixValue===========================#
 def change_matrix_value(): 
@@ -196,7 +209,9 @@ def change_matrix_value():
     value = int(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
     
     storedMatrices.get(choice).set_value(row,column,value) # library matrix is overwritten with the new value
-
+#=======================deleteMatrix===========================#
+def delete_matrix():
+    pass
 
 ################################################################
 # Main Programm                                                #
