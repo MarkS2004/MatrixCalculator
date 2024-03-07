@@ -153,7 +153,92 @@ class MatrixClass:
 
 #========================InputMatrix===========================#
 def input_matrix():
-    pass
+    while True:
+        os.system("cls") # clears screen
+        name = input_matrix_name()
+
+        os.system("cls") # clears screen
+        rows = input_matrix_rows()
+
+        os.system("cls") # clears screen
+        columns = input_matrix_column()
+
+        storedMatrices[name] = MatrixClass(rows, columns) # create and store Matrix
+        #-----------------------------ValueInput---------------------------#
+        for i in range(1,rows+1):
+            for j in range(1,columns+1):
+                while True:
+                    os.system("cls")
+
+                    print(f"{name} =\n {storedMatrices.get(name)}") # prints unfinished matrix
+
+                    value = input(f"Welchen Wert soll das Element an Stelle {i}, {j} haben?\n").strip()
+                    
+                    try:
+                        value = float(value) # try to convert to float
+                    except ValueError:
+                        print("\n!!! Bitte gebe eine Ganz- oder Gleitkommazahl ein !!!")
+                        input("\nDrücke Enter um erneut einen Wert einzugeben")
+                    else:
+                        break # goes to next element
+                
+
+                storedMatrices.get(name).set_value(i ,j ,value) # sets Value at Element i, j
+
+        #-----------------------------showResult---------------------------#
+        os.system("cls")
+        print("Folgende Matrix wurde angelegt:")
+        print(f"{name} =\n {storedMatrices.get(name)}")
+
+        #-----------------------------TryAgain?---------------------------#
+        print("\nMöchtes du eine weitere Matrix anlegen?(Y/N)") 
+        if input() == "Y": pass # repeats input_matrix if Y
+        else: return # return to menu
+
+#=======================inputMatrixName===========================#
+def input_matrix_name():
+    print("Wie soll die Matrix heißen?")
+    while True:
+        name = input().strip()
+
+        if str(storedMatrices.get(name)) != "None": # checks if matrix exists
+            print("\n!!! Die Matrix existiert bereits !!!")
+            print("\nBite gebe einen anderen Namen ein:")
+        else: return name # leaves input_matrix_name
+
+#=======================inputMatrixRows===========================#
+def input_matrix_rows():
+    print("Wie viele Zeilen soll die Matrix haben?")
+    while True:
+        rows = input().strip()
+        try:
+            rows = int(rows) # try to convert to int
+        except ValueError:
+            print("\n!!! Die Anzahl an Zeilen muss eine Ganzzahl sein !!!")
+        else:
+            if rows < 1 or rows > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
+                print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
+
+            else: return rows # leave input_matrix_rows
+                
+        print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
+
+#=======================inputMatrixColumns===========================#
+def input_matrix_column():
+    print("Wie viele Spalten soll die Matrix haben?")
+    while True:
+        columns = input().strip()
+        try:
+            columns = int(columns) # try to convert to int
+        except ValueError:
+            print("\n!!! Die Anzahl an Spalten muss eine Ganzzahl sein !!!")
+        else:
+            if columns < 1 or columns > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
+                print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
+
+            else: return columns # leave input_matrix_column
+                
+        print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
 
 #=====================changeMatrixName=========================#
 def change_matrix_name():
@@ -177,10 +262,11 @@ def show_matrix():
         choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
 
         if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
+            os.system("cls") # clears screen
             print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
 
         else:
-            print("Die eingegebene Matrix existiert nicht")
+            print("\n!!! Die eingegebene Matrix existiert nicht !!!")
 
         print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
         if input() == "Y": pass # repeats show_matrix if Y
@@ -214,5 +300,7 @@ storedMatrices["matA"] = A
 
 storedMatrices["matB"] = B
 
+# input_matrix()
+input_matrix()
 show_matrix()
 #=========================SubCaption===========================#
