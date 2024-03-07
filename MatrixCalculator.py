@@ -197,7 +197,7 @@ def submenu_operation_manager():
 -----------------------------------------------------
 (1) Matrizen addieren
 (2) Matrizen subtrahieren
-(3) Matirzen multiplizieren
+(3) Matrizen multiplizieren
 
 (0) Zurück zum Hauptmenü
 
@@ -386,6 +386,113 @@ def delete_matrix():
         if input() == "Y": pass # repeats delete_matrix if Y
         else: return # return to menu
 
+#===================FunctionsForOperations=====================#
+
+#---------------------------addMatrix--------------------------#
+def add_matrix():
+    """"brief: this function lets the user add two matrices"""
+
+    while True:
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix ist der erste Summand?")
+        summand1 = input_not_existing_matrix()
+        summand1 = storedMatrices.get(summand1) # convert to object
+
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix ist der zweite Summand?")
+        summand2 = input_not_existing_matrix()
+        summand2 = storedMatrices.get(summand2) # convert to object
+
+        if( (summand1.get_columns() == summand2.get_columns())\
+            and (summand1.get_rows() == summand2.get_rows()) ):
+
+            result = summand1 + summand2
+
+            os.system("cls")
+            print(f"Das Ergebnis der Addition ist:\n{result}")
+
+        else:
+            print("\n!!! Die Matrizen konnten nicht addiert werden,da sie nicht von gleicher Größe sind !!!\n")
+            
+        print("\nMöchtest du eine weitere Matrix addieren?(Y/N)\n>") 
+        if input() == "Y": pass # repeats add_matrix if Y
+        else: return # return to menu
+
+#---------------------------subMatrix--------------------------#
+def sub_matrix():
+    """"brief: this function lets the user subtract two matrices"""
+
+    while True:
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix ist der Minuend?")
+        minuend = input_not_existing_matrix()
+        minuend = storedMatrices.get(minuend) # convert to object
+
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix ist der Subtrahend?")
+        subtrahend = input_not_existing_matrix()
+        subtrahend = storedMatrices.get(subtrahend) # convert to object
+
+        if( (minuend.get_columns() == subtrahend.get_columns())\
+            and (minuend.get_rows() == subtrahend.get_rows()) ):
+
+            result = minuend - subtrahend
+
+            os.system("cls")
+            print(f"Das Ergebnis der Subtraktion ist:\n{result}")
+
+        else:
+            print("\n!!! Die Matrizen konnten nicht subtrahiert werden,da sie nicht von gleicher Größe sind !!!\n")
+            
+        print("\nMöchtest du eine weitere Matrix subtrahieren?(Y/N)\n>") 
+        if input() == "Y": pass # repeats sub_matrix if Y
+        else: return # return to menu
+
+#=========================mulMatrix============================#
+def mul_matrix():
+    """"brief: this function lets the user multiply two matrices"""
+
+    while True:
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix ist der erste Faktor?")
+        factor1 = input_not_existing_matrix()
+        factor1 = storedMatrices.get(factor1) # convert to object
+
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix ist der zweite Faktor?")
+        factor2 = input_not_existing_matrix()
+        factor2 = storedMatrices.get(factor2) # convert to object
+
+        if( (factor1.get_columns() == factor2.get_rows())\
+            and (factor1.get_rows() == factor2.get_columns()) ):
+
+            result = factor1 * factor2
+
+            os.system("cls")
+            print(f"Das Ergebnis der Multiplikation ist:\n{result}")
+
+        else:
+            print("\n!!! Die Matrizen konnten nicht muliplizert werden,\nda die Zeilen des ersten Faktores nicht mit den Spalten\ndes zweiten Faktors übereinstimmen (und andersherum) !!!\n")
+            
+        print("\nMöchtest du eine weitere Matrix multiplizieren?(Y/N)\n>") 
+        if input() == "Y": pass # repeats mul_matrix if Y
+        else: return # return to menu
+
+
+
+
+
+
+
+
+
+
 #------------------------ChangeMatrixValue---------------------#
 def change_matrix_value():
     """brief: this fuction lets the user change a given value"""
@@ -417,80 +524,6 @@ def change_matrix_value():
     value = float(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
     
     storedMatrices.get(choice).set_value(row,column,value) # library matrix is overwritten with the new value
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#=========================addMatrix============================#
-def add_matrix():
-    os.system("cls")
-    while True:
-        summand1 = input("Wie heißt der erste Summand?: \n") # input user: name of summand
-        if str(storedMatrices.get(summand1)) == "None":   # check if matrix is in dictonary
-            print("Die Matrix existiert nicht!")
-
-        summand2 = input("Wie heißt der zweite Summand?: \n") # input user: name of summand
-        if str(storedMatrices.get(summand2)) == "None":   # check if matrix is in dictonary
-            print("Die Matrix existiert nicht!")
-            
-        sum = storedMatrices.pop(summand1) + storedMatrices.pop(summand2)
-        print(sum)
-
-
-
-
-        print("Press Enter to get back!")
-        input()
-        break
-    
-#=========================subMatrix============================#
-def sub_matrix():
-    os.system("cls")
-    while True:
-        minuend = input("Wie heißt der Minuend?: \n") # input user: name of minuend
-        if str(storedMatrices.get(minuend)) == "None":   # check if matrix is in dictonary
-            print("Die Matrix existiert nicht!")
-
-        subtrahend = input("Wie heißt der Subtrahend?: \n") # input user: name of subtrahend
-        if str(storedMatrices.get(subtrahend)) == "None":   # check if matrix is in dictonary
-            print("Die Matrix existiert nicht!")
-           
-        difference = storedMatrices.pop(minuend) - storedMatrices.pop(subtrahend)
-        print(difference)
-
-        print("Press Enter to get back!")
-        input()
-        break
-
-#=========================mulMatrix============================#
-def mul_matrix():
-    os.system("cls")
-    while True:
-        factor1 = input("Wie heißt der erste Faktor?: \n") # input user: name of summand
-        if str(storedMatrices.get(factor1)) == "None":   # check if matrix is in dictonary
-            print("Die Matrix existiert nicht!")
-
-        factor2 = input("Wie heißt der zweite Faktor?: \n") # input user: name of summand
-        if str(storedMatrices.get(factor2)) == "None":   # check if matrix is in dictonary
-            print("Die Matrix existiert nicht!")
-            
-        product = storedMatrices.pop(factor1) + storedMatrices.pop(factor2)
-        print(product)
-
-        print("Press Enter to get back!")
-        input()
-        break
 
 ################################################################
 # Main Programm/Menu                                           #
