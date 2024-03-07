@@ -168,20 +168,23 @@ def change_matrix_name():
 
 #=========================showMatrix===========================#
 def show_matrix():
-    os.system("cls") # clears screen
+    while True:
+        os.system("cls") # clears screen
 
-    print("Folgende Matrizen wurden angelegt:")
-    for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrix keys
+        print("Folgende Matrizen wurden angelegt:")
+        for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrix keys
 
-    choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
+        choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
 
-    if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
-        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
+        if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
+            print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
 
-    else:
-        print("Die eingegebene Matrix existiert nicht")
+        else:
+            print("Die eingegebene Matrix existiert nicht")
 
-    input("\nDrücke eine Taste, um zum Menü zurückzukehren") # Waits until user presses a key
+        print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
+        if input() == "Y": pass # repeats show_matrix if Y
+        else: return # return to menu
 
 #===================changeMatrixValue===========================#
 def change_matrix_value(): 
