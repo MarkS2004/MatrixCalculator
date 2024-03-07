@@ -18,17 +18,9 @@
 import os
 
 ################################################################
-# Variables, Constants                                         #
-################################################################
-MAX_SIZE_OF_Matrix = 10
-
-storedMatrices = dict()
-
-################################################################
 # Matrix Class                                                 #
 ################################################################
 class MatrixClass:
-
 #=========================Constructor==========================#
     def __init__(self, rows, columns):
         if not type(rows) is int: # check if rows is interger
@@ -134,145 +126,127 @@ class MatrixClass:
                 
         else:
             raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
+        
+################################################################
+# Variables, Constants                                         #
+################################################################
+MAX_SIZE_OF_Matrix = 10
+
+storedMatrices = {"emptyMatrix": MatrixClass(3,3)}
 
 ################################################################
 # Functions                                                    #
 ################################################################
-#============================Intro=============================#
-def intro(): #intro funktion
-    os.system("cls") # clears screen
-    print("Der folgende Matrizenrechener wurde von Marvin Wolff, Mark Schaab und Kemal Bagci im Rahmen der Informatik-\n\
-klausur am 21.03.2024 ertsellt. Der Rechner kann verschiedene Rechenoperationen durchführen\n\
-Diese werden im folgenden Hauptmenü zu auswahl bereit gestellt.\n\n\
-Drücke Enter um ins Hauptmenü zu kommen.\n")
-    input()
-#=========================VarialeManager========================#
-def variable_manager():
-    while True:
-        os.system("cls") # clears screen
-        print("Variablenmanager\n\
-------------------------------------------------------------------------------------------------\n\n\
-Was möchtest du machen?\n\n\
-(1) Matrix eingeben\n\
-(2) Matrix anzeigen\n\
-(3) Matrix löschen\n\
-(4) Name ändern\n\
-(5) Werte ändern\n\n\
-(0) Zurück zum Hauptmenü ")
-    
-        match input(): # selction of the differnt Choices to change the matrices 
-            case "1":
-              input_matrix()
-
-            case "2":
-                show_matrix()
-
-            case "3":
-                delete_matrix()
-
-            case "4":
-                change_matrix_name()
-
-            case "5":
-                change_matrix_value()
-
-            case "0":
-                return
-            
-            case _:
-                pass
-
-#=====================OperationManager=========================#
-def operation_manager():
-    while True:
-        os.system("cls") # clears screen
-        print(" Wähle die gewüschte Opertion?\n\n\
-(1) Matrizen addieren\n\
-(2) Matrizen subtrahieren\n\
-(3) Matirzen multiplizieren\n\
-(4) Matrizen vergleichen\n\
-(0) Zurück zum Hauptmenü\ ")
         
-        match input(): # selction of operations 
-            case "1":
-                add_matrix()
+#========================MenuFunctions=========================#
+        
+#------------------------WelcomeMenu---------------------------#
+def menu_welcome():
+    """brief: this function prints a welcoming message,
+    it ends if Enter is pressed"""
 
-            case "2":
-                sub_matrix()
+    os.system("cls") # clears screen
+    print(
+"""Der folgende Matrizenrechener wurde von Marvin Wolff, Mark Schaab und Kemal Bagci
+im Rahmen der Informatikklausur am 21.03.2024 ertsellt.
+Der Rechner kann verschiedene Rechenoperationen durchführen.
+Diese werden im folgenden Hauptmenü zur Auswahl bereit gestellt.
 
-            case "3":
-                mul_matrix()
+Drücke Enter um ins Hauptmenü zu gelangen""")
+    
+    input(">")
 
-            case "4":
-                eq_matrix()
-            
-            case "0":
-                return
-            
-            case _:
-                pass
+#--------------------VariableManagerMenu-----------------------#
+def submenu_variable_manager():
+    """brief: this functions prints the VariableManager and lets one navigate,
+    it ends if "0" is pressed"""
 
-
-#========================InputMatrix===========================#
-def input_matrix():
     while True:
         os.system("cls") # clears screen
-        name = input_matrix_name()
+        print(
+"""Variablenmanager
+-----------------------------------------------------
+(1) Matrix eingeben
+(2) Matrix anzeigen
+(3) Matrix löschen
+(4) Name ändern
+(5) Werte ändern
 
-        os.system("cls") # clears screen
-        rows = input_matrix_rows()
+(0) Zurück zum Hauptmenü
 
-        os.system("cls") # clears screen
-        columns = input_matrix_column()
+Wähle eine Zahl:""")
+        
+        match input(">").strip(): # selction of the differnt Choices to change the matrices 
+            case "1": input_matrix()
+            case "2": show_matrix()
+            case "3": delete_matrix()
+            case "4": change_matrix_name()
+            case "5": change_matrix_value()
+            case "0": return
+            case _: pass
 
-        storedMatrices[name] = MatrixClass(rows, columns) # create and store Matrix
-        #-----------------------------ValueInput---------------------------#
-        for i in range(1,rows+1):
-            for j in range(1,columns+1):
-                while True:
-                    os.system("cls")
+#--------------------OperationManagerMenu----------------------#
+def submenu_operation_manager():
+    """brief: this functions prints the OperationsManager and lets one navigate,
+    it ends if "0" is pressed"""
 
-                    print(f"{name} =\n {storedMatrices.get(name)}") # prints unfinished matrix
-
-                    value = input(f"Welchen Wert soll das Element an Stelle {i}, {j} haben?\n").strip()
-                    
-                    try:
-                        value = float(value) # try to convert to float
-                    except ValueError:
-                        print("\n!!! Bitte gebe eine Ganz- oder Gleitkommazahl ein !!!")
-                        input("\nDrücke Enter um erneut einen Wert einzugeben")
-                    else:
-                        break # goes to next element
-                
-
-                storedMatrices.get(name).set_value(i ,j ,value) # sets Value at Element i, j
-
-        #-----------------------------showResult---------------------------#
-        os.system("cls")
-        print("Folgende Matrix wurde angelegt:")
-        print(f"{name} =\n {storedMatrices.get(name)}")
-
-        #-----------------------------TryAgain?---------------------------#
-        print("\nMöchtes du eine weitere Matrix anlegen?(Y/N)") 
-        if input() == "Y": pass # repeats input_matrix if Y
-        else: return # return to menu
-
-#=======================inputMatrixName===========================#
-def input_matrix_name():
-    print("Wie soll die Matrix heißen?")
     while True:
-        name = input().strip()
+        os.system("cls") # clears screen
+        print(
+""" Variablenmanager
+-----------------------------------------------------
+(1) Matrizen addieren
+(2) Matrizen subtrahieren
+(3) Matirzen multiplizieren
+
+(0) Zurück zum Hauptmenü
+
+Wähle eine Zahl:""")
+        
+        match input(">").strip(): # selction of operations 
+            case "1": add_matrix()
+            case "2": sub_matrix()
+            case "3": mul_matrix()
+            case "0": return
+            case _: pass
+
+#===============FunctionsForVariableManagment==================#
+
+#---------------------InputExistingMatrix----------------------#
+def input_existing_matrix():
+    """brief: this functions inputs matrix name,
+    checks if matrix exists,
+    returns valid matrix name"""
+
+    while True:
+        name = input(">").strip()
 
         if str(storedMatrices.get(name)) != "None": # checks if matrix exists
             print("\n!!! Die Matrix existiert bereits !!!")
             print("\nBite gebe einen anderen Namen ein:")
-        else: return name # leaves input_matrix_name
+        else: return name # return valid matrix name
 
-#=======================inputMatrixRows===========================#
-def input_matrix_rows():
-    print("Wie viele Zeilen soll die Matrix haben?")
+#--------------------InputNotExistingMatrix--------------------#
+def input_not_existing_matrix():
+    """brief: this functions inputs matrix name,
+    checks if matrix does not exist,
+    returns valid matrix name"""
+
     while True:
-        rows = input().strip()
+        name = input(">").strip()
+
+        if str(storedMatrices.get(name)) == "None": # checks if matrix does not exist
+            print("\n!!! Die Matrix existiert nicht !!!")
+            print("\nBite gebe einen anderen Namen ein:")
+        else: return name # return valid matrix name
+
+#-----------------------InputMatrixRows------------------------#
+def input_matrix_rows():
+    """brief: this function takes user input for rows,
+    returns valid number of rows"""
+
+    while True:
+        rows = input(">").strip()
         try:
             rows = int(rows) # try to convert to int
         except ValueError:
@@ -281,15 +255,17 @@ def input_matrix_rows():
             if rows < 1 or rows > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
                 print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
 
-            else: return rows # leave input_matrix_rows
+            else: return rows
                 
         print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
 
-#=======================inputMatrixColumns===========================#
+#---------------------InputMatrixColumns-----------------------#
 def input_matrix_column():
-    print("Wie viele Spalten soll die Matrix haben?")
+    """brief: this function takes user input for columns,
+    returns valid number of columns"""
+
     while True:
-        columns = input().strip()
+        columns = input(">").strip()
         try:
             columns = int(columns) # try to convert to int
         except ValueError:
@@ -298,68 +274,143 @@ def input_matrix_column():
             if columns < 1 or columns > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
                 print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
 
-            else: return columns # leave input_matrix_column
+            else: return columns
                 
         print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
 
-#=====================ChangeMatrixName=========================#
-def change_matrix_name():
-    choice = input("Wie heißt die Matrix, bei welcher der Name geändert werden soll?: \n") # input user: name of matrix, which should be changed
-    if str(storedMatrices.get(choice)) == "None":   # check if matrix is in dictonary
-        print("Die Matrix existiert nicht!")
-        input()
-        return  # leave if matrix is not in dictonary
-    
-    name = input("Was ist der neue Name der Matrix?: \n")    # new name of Matrix 
-    storedMatrices[name] = storedMatrices.pop(choice)
+#------------------------InputMatrix---------------------------#
+def input_matrix():
+    """brief: this fuction lets the user create 
+    a new matrix variable"""
 
-#=========================showMatrix===========================#
-def show_matrix():
     while True:
         os.system("cls") # clears screen
+        print("Wie soll die Matrix heißen?")
+        name = input_existing_matrix()
 
-        print("Folgende Matrizen wurden angelegt:")
-        for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrix keys
+        os.system("cls") # clears screen
+        print("Wie viele Zeilen soll die Matrix haben?")
+        rows = input_matrix_rows()
 
-        choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
+        os.system("cls") # clears screen
+        print("Wie viele Spalten soll die Matrix haben?")
+        columns = input_matrix_column()
 
-        if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
-            os.system("cls") # clears screen
-            print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
+        # create and store Matrix
+        storedMatrices[name] = MatrixClass(rows, columns)
 
-        else:
-            print("\n!!! Die eingegebene Matrix existiert nicht !!!")
+        # Input Values
+        for i in range(1,rows+1):
+            for j in range(1,columns+1):
+                while True:
+                    os.system("cls")
+
+                    print(f"{name} =\n {storedMatrices.get(name)}") # prints unfinished matrix
+
+                    value = input(f"Welchen Wert soll das Element an Stelle {i}, {j} haben?\n>").strip()
+                    
+                    try:
+                        value = float(value) # try to convert to float
+                    except ValueError:
+                        print("\n!!! Bitte gebe eine Ganz- oder Gleitkommazahl ein !!!")
+                        input("\nDrücke Enter um erneut einen Wert einzugeben\n>")
+                    else:
+                        break # goes to next element
+                
+
+                storedMatrices.get(name).set_value(i ,j ,value) # sets Value at Element i, j
+
+        # Show Result
+        os.system("cls")
+        print("Folgende Matrix wurde angelegt:")
+        print(f"{name} =\n {storedMatrices.get(name)}")
+
+        # Try Again
+        print("\nMöchtes du eine weitere Matrix anlegen?(Y/N)") 
+        if input(">") == "Y": pass # repeats input_matrix if Y
+        else: return # return to menu
+
+#--------------------ChangeMatrixName--------------------------#
+def change_matrix_name():
+    """brief: this function lets the user change the name of a matrix"""
+    
+    os.system("cls") # clears screen
+    print_created_matrices()
+
+    print("Wie heißt die Matrix, bei der der Name geändert werden soll?")
+    choice = input_not_existing_matrix()
+    
+    name = input("Was ist der neue Name der Matrix?\n>").strip() 
+    storedMatrices[name] = storedMatrices.pop(choice)
+
+#-------------------------showMatrix---------------------------#
+def show_matrix():
+    """brief: this function lets the user see the value of a matrix"""
+
+    while True:
+        os.system("cls") # clears screen
+        print_created_matrices()
+
+        print("\nWelche Matrix möchtest du anzeigen?")
+        choice = input_not_existing_matrix()
+        print(f"{choice} =\n {storedMatrices.get(choice)}")
 
         print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
         if input() == "Y": pass # repeats show_matrix if Y
         else: return # return to menu
 
-#===================changeMatrixValue===========================#
-def change_matrix_value(): 
-    choice = input("In welcher Martix soll ein Wert geändert werden?\n") # user input matrix name
-    if str(storedMatrices.get(choice)) == "None": # compare if entered matrix name excists in the library
-        print("Die Matrix existiert nicht") 
-        input()
-        return
+#----------------------printCreatedMatrices--------------------#
+def print_created_matrices():
+    """brief: this fuctions prints a list of all created functions"""
+
+    print("Folgende Matrizen wurden angelegt:")
+    for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrices
+
+#------------------------ChangeMatrixValue---------------------#
+def change_matrix_value():
+    """brief: this fuction lets the user change a given value"""
+
+    os.system("cls") # clears screen
+    print_created_matrices()
+
+    print("\nBei welcher Martix soll der Wert geändert werden?")
+    choice = input_not_existing_matrix()
+
+    os.system("cls") # clears screen
+    print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
     
-    tempMat = storedMatrices.get(choice) # temporary matrix is created and selected matrix which is inserted
+    tempMat = storedMatrices.get(choice) # temporary matrix is created
     
-    row = int(input("In welcher Zeile der Martix soll ein Wert geändert werden?\n")) # user input matrix row
+    row = int(input("\nIn welcher Zeile der Martix soll der Wert geändert werden?\n")) # user input matrix row
 
     if row < 1 or row > tempMat.get_rows(): # if row is lower than 1 or select row is larger than given row
         print("Die Matrix besitzt nicht so viele Zeilen") 
         input()
         return
     
-    column = int(input("In welcher Spalte der Martix soll ein Wert geändert werden?\n")) # user input matrix column
+    column = int(input("In welcher Spalte der Martix soll der Wert geändert werden?\n")) # user input matrix column
     if column < 1 or column > tempMat.get_columns(): # if column is lower than 1 or select column is larger than given column
         print("Die Matrix besitzt nicht so viele Spalten")
         input()
         return
     
-    value = int(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
+    value = float(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
     
     storedMatrices.get(choice).set_value(row,column,value) # library matrix is overwritten with the new value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #=======================deleteMatrix===========================#
 def delete_matrix():
     pass
@@ -424,72 +475,31 @@ def mul_matrix():
         input()
         break
 
-#=========================eqMatrix=============================#
-def eq_matrix():
-    pass
-
 ################################################################
-# Main Programm                                                #
+# Main Programm/Menu                                           #
 ################################################################
 
-intro() # das muss mark korrigieren!!
+menu_welcome()
+
 while True:
     os.system("cls") # clears screen
-    # output selection
-    print("Hauptmenü\n\
-------------------------------------------------------------------------------------------------\n\n\
-Welche Operationen möchtest du durchführen?\n\n\
-1)  Varianlenmanager (z.B. Matrizen eingeben/anzeigen/löschen, usw.)\n\
-2)  Eigenschaften berechen (z.B. Determinante, Spur)\n\
-3)  Mathematische Grundoperationen (+,-,*)\n\
-4)  Matrix transponieren\n\
-5)  Inverse berechnen\n\
-6)  Eigenwerte und Eigenvektoren (Max 3x3)\n\n\
-0)  Porgramm schließen\n\n\
-Wähle die Nummer für die gewünschte Operation!\n")
 
-    match input():  # selction mode
-        case "1":
-           variable_manager() 
+    print(
+"""Hauptmenü
+-----------------------------------------------------
+(1) Variablenmanager (anlegen, anzeigen, löschen ...)
+(2) Mathematische Grundoperationen (+,-,*)
+(3) Matrix transponieren
+(4) Determinate berechnen
 
-        case "2":
-            pass
+(0) Programm schließen
 
-        case "3":
-            operation_manager()
+Wähle eine Zahl:""")
 
-        case "4":
-            pass
-
-        case "5":
-            pass
-
-        case "6":
-            pass
-
-        case "0":
-            break
-
-        case _: # for every wrong input the main menu will load again
-            pass
-
-
-# A = MatrixClass(3, 3)
-
-# for i in range(A.get_rows()):
-#     for j in range(A.get_columns()):
-#         A.set_value(i+1, j+1, i*A.get_rows() + j)
-
-# B = MatrixClass(3, 3)
-
-# for i in range(B.get_rows()):
-#     for j in range(B.get_columns()):
-#         B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
-
-
-# storedMatrices["matA"] = A
-
-# storedMatrices["matB"] = B
-
-show_matrix()
-#=========================SubCaption===========================#
+    match input(">").strip():
+        case "1": submenu_variable_manager() 
+        case "2": submenu_operation_manager()
+        case "3": pass
+        case "4": pass
+        case "0": break
+        case _: pass
