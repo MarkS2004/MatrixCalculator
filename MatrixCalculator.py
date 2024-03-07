@@ -150,6 +150,47 @@ class MatrixClass:
 ################################################################
 # Functions                                                    #
 ################################################################
+#============================Intro=============================#
+def intro(): #intro funktion
+    os.system("cls") # clears screen
+    print("Der folgende Matrizenrechener wurde von Marvin Wolff, Mark Schaab und Kemal Bagci im Rahmen der Informatik-\n\
+klausur am 21.03.2024 ertsellt. Der Rechner kann verschiedene Rechenoperationen durchführen\n\
+Diese werden im folgenden Hauptmenü zu auswahl bereit gestellt.\n\n\
+Drücke Enter um ins Hauptmenü zu kommen.\n")
+    input()
+#=========================VarialeManager========================#
+def variable_manager():
+    while True:
+        os.system("cls") # clears screen
+        print(" Was möchtest du machen?\n\n\
+(1) Matrix eingeben\n\
+(2) Matrix anzeigen\n\
+(3) Matirx löschen\n\
+(4) Name der Matrix ändern\n\
+(5) Element der Matrix ändern\n\n\
+(0) Zurück zum Hauptmenü\ ")
+    
+        match input(): # selction of the differnt Choices to change the matrices 
+            case "1":
+              input_matrix()
+
+            case "2":
+                show_matrix()
+
+            case "3":
+                delete_matrix()
+
+            case "4":
+                change_matrix_name()
+
+            case "5":
+                change_matrix_value()
+
+            case "0":
+                return
+            
+            case _:
+                pass
 
 #========================InputMatrix===========================#
 def input_matrix():
@@ -194,22 +235,64 @@ def delete_matrix():
 ################################################################
 # Main Programm                                                #
 ################################################################
-A = MatrixClass(3, 3)
+intro() # das muss mark korrigieren!!
+while True:
+    os.system("cls") # clears screen
+    # output selection
+    print("Hauptmenü:\n\n\n\
+Welche Operationen möchtest du durchführen?\n\n\
+1)  Varianlenmanager (z.B. Matrizen eingeben/anzeigen/löschen, usw.)\n\
+2)  Eigenschaften berechen (z.B. Determinante, Spur)\n\
+3)  Mathematische Grundopperationen (+,-,*)\n\
+4)  Matrix Transponieren\n\
+5)  Inverse Berechnen\n\
+6)  Eigenwerte und Eigenvektoren (Max 3x3)\n\n\
+0)  Porgramm schließen\n\n\
+Wähle die Nummer für die gewünschte Operation!\n")
 
-for i in range(A.get_rows()):
-    for j in range(A.get_columns()):
-        A.set_value(i+1, j+1, i*A.get_rows() + j)
+    match input():  # selction mode
+        case "1":
+           variable_manager() 
 
-B = MatrixClass(3, 3)
+        case "2":
+            pass
 
-for i in range(B.get_rows()):
-    for j in range(B.get_columns()):
-        B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
+        case "3":
+            pass
+
+        case "4":
+            pass
+
+        case "5":
+            pass
+
+        case "6":
+            pass
+
+        case "0":
+            break
+
+        case _: # for every wrong input the main menu will load again
+            pass
 
 
-storedMatrices["matA"] = A
+# A = MatrixClass(3, 3)
 
-storedMatrices["matB"] = B
+# for i in range(A.get_rows()):
+#     for j in range(A.get_columns()):
+#         A.set_value(i+1, j+1, i*A.get_rows() + j)
 
-show_matrix()
+# B = MatrixClass(3, 3)
+
+# for i in range(B.get_rows()):
+#     for j in range(B.get_columns()):
+#         B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
+
+
+# storedMatrices["matA"] = A
+
+# storedMatrices["matB"] = B
+
+# show_matrix()
 #=========================SubCaption===========================#
+
