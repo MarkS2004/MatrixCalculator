@@ -162,13 +162,15 @@ Drücke Enter um ins Hauptmenü zu kommen.\n")
 def variable_manager():
     while True:
         os.system("cls") # clears screen
-        print(" Was möchtest du machen?\n\n\
+        print("Variablenmanager\n\
+------------------------------------------------------------------------------------------------\n\n\
+Was möchtest du machen?\n\n\
 (1) Matrix eingeben\n\
 (2) Matrix anzeigen\n\
-(3) Matirx löschen\n\
-(4) Name der Matrix ändern\n\
-(5) Element der Matrix ändern\n\n\
-(0) Zurück zum Hauptmenü\ ")
+(3) Matrix löschen\n\
+(4) Name ändern\n\
+(5) Werte ändern\n\n\
+(0) Zurück zum Hauptmenü ")
     
         match input(): # selction of the differnt Choices to change the matrices 
             case "1":
@@ -225,7 +227,92 @@ def operation_manager():
 
 #========================InputMatrix===========================#
 def input_matrix():
-    pass
+    while True:
+        os.system("cls") # clears screen
+        name = input_matrix_name()
+
+        os.system("cls") # clears screen
+        rows = input_matrix_rows()
+
+        os.system("cls") # clears screen
+        columns = input_matrix_column()
+
+        storedMatrices[name] = MatrixClass(rows, columns) # create and store Matrix
+        #-----------------------------ValueInput---------------------------#
+        for i in range(1,rows+1):
+            for j in range(1,columns+1):
+                while True:
+                    os.system("cls")
+
+                    print(f"{name} =\n {storedMatrices.get(name)}") # prints unfinished matrix
+
+                    value = input(f"Welchen Wert soll das Element an Stelle {i}, {j} haben?\n").strip()
+                    
+                    try:
+                        value = float(value) # try to convert to float
+                    except ValueError:
+                        print("\n!!! Bitte gebe eine Ganz- oder Gleitkommazahl ein !!!")
+                        input("\nDrücke Enter um erneut einen Wert einzugeben")
+                    else:
+                        break # goes to next element
+                
+
+                storedMatrices.get(name).set_value(i ,j ,value) # sets Value at Element i, j
+
+        #-----------------------------showResult---------------------------#
+        os.system("cls")
+        print("Folgende Matrix wurde angelegt:")
+        print(f"{name} =\n {storedMatrices.get(name)}")
+
+        #-----------------------------TryAgain?---------------------------#
+        print("\nMöchtes du eine weitere Matrix anlegen?(Y/N)") 
+        if input() == "Y": pass # repeats input_matrix if Y
+        else: return # return to menu
+
+#=======================inputMatrixName===========================#
+def input_matrix_name():
+    print("Wie soll die Matrix heißen?")
+    while True:
+        name = input().strip()
+
+        if str(storedMatrices.get(name)) != "None": # checks if matrix exists
+            print("\n!!! Die Matrix existiert bereits !!!")
+            print("\nBite gebe einen anderen Namen ein:")
+        else: return name # leaves input_matrix_name
+
+#=======================inputMatrixRows===========================#
+def input_matrix_rows():
+    print("Wie viele Zeilen soll die Matrix haben?")
+    while True:
+        rows = input().strip()
+        try:
+            rows = int(rows) # try to convert to int
+        except ValueError:
+            print("\n!!! Die Anzahl an Zeilen muss eine Ganzzahl sein !!!")
+        else:
+            if rows < 1 or rows > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
+                print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
+
+            else: return rows # leave input_matrix_rows
+                
+        print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
+
+#=======================inputMatrixColumns===========================#
+def input_matrix_column():
+    print("Wie viele Spalten soll die Matrix haben?")
+    while True:
+        columns = input().strip()
+        try:
+            columns = int(columns) # try to convert to int
+        except ValueError:
+            print("\n!!! Die Anzahl an Spalten muss eine Ganzzahl sein !!!")
+        else:
+            if columns < 1 or columns > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
+                print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
+
+            else: return columns # leave input_matrix_column
+                
+        print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
 
 #=====================ChangeMatrixName=========================#
 def change_matrix_name():
@@ -249,10 +336,11 @@ def show_matrix():
         choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
 
         if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
+            os.system("cls") # clears screen
             print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
 
         else:
-            print("Die eingegebene Matrix existiert nicht")
+            print("\n!!! Die eingegebene Matrix existiert nicht !!!")
 
         print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
         if input() == "Y": pass # repeats show_matrix if Y
@@ -378,13 +466,14 @@ intro() # das muss mark korrigieren!!
 while True:
     os.system("cls") # clears screen
     # output selection
-    print("Hauptmenü:\n\n\n\
+    print("Hauptmenü\n\
+------------------------------------------------------------------------------------------------\n\n\
 Welche Operationen möchtest du durchführen?\n\n\
 1)  Varianlenmanager (z.B. Matrizen eingeben/anzeigen/löschen, usw.)\n\
 2)  Eigenschaften berechen (z.B. Determinante, Spur)\n\
-3)  Mathematische Grundopperationen (+,-,*)\n\
-4)  Matrix Transponieren\n\
-5)  Inverse Berechnen\n\
+3)  Mathematische Grundoperationen (+,-,*)\n\
+4)  Matrix transponieren\n\
+5)  Inverse berechnen\n\
 6)  Eigenwerte und Eigenvektoren (Max 3x3)\n\n\
 0)  Porgramm schließen\n\n\
 Wähle die Nummer für die gewünschte Operation!\n")
@@ -414,9 +503,23 @@ Wähle die Nummer für die gewünschte Operation!\n")
         case _: # for every wrong input the main menu will load again
             pass
 
-print(storedMatrices.get("matA"))
-change_matrix_value()
-print(storedMatrices.get("matA"))
-input()
-#=========================SubCaption===========================#
 
+# A = MatrixClass(3, 3)
+
+# for i in range(A.get_rows()):
+#     for j in range(A.get_columns()):
+#         A.set_value(i+1, j+1, i*A.get_rows() + j)
+
+# B = MatrixClass(3, 3)
+
+# for i in range(B.get_rows()):
+#     for j in range(B.get_columns()):
+#         B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
+
+
+# storedMatrices["matA"] = A
+
+# storedMatrices["matB"] = B
+
+show_matrix()
+#=========================SubCaption===========================#
