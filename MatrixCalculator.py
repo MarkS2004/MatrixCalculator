@@ -192,11 +192,42 @@ def variable_manager():
             case _:
                 pass
 
+#=====================OperationManager=========================#
+def operation_manager():
+    while True:
+        os.system("cls") # clears screen
+        print(" Wähle die gewüschte Opertion?\n\n\
+(1) Matrizen addieren\n\
+(2) Matrizen subtrahieren\n\
+(3) Matirzen multiplizieren\n\
+(4) Matrizen vergleichen\n\
+(0) Zurück zum Hauptmenü\ ")
+        
+        match input(): # selction of operations 
+            case "1":
+                add_matrix()
+
+            case "2":
+                sub_matrix()
+
+            case "3":
+                mul_matrix()
+
+            case "4":
+                eq_matrix()
+            
+            case "0":
+                return
+            
+            case _:
+                pass
+
+
 #========================InputMatrix===========================#
 def input_matrix():
     pass
 
-#=====================changeMatrixName=========================#
+#=====================ChangeMatrixName=========================#
 def change_matrix_name():
     choice = input("Wie heißt die Matrix, bei welcher der Name geändert werden soll?: \n") # input user: name of matrix, which should be changed
     if str(storedMatrices.get(choice)) == "None":   # check if matrix is in dictonary
@@ -257,9 +288,92 @@ def change_matrix_value():
 def delete_matrix():
     pass
 
+#=========================addMatrix============================#
+def add_matrix():
+    os.system("cls")
+    while True:
+        summand1 = input("Wie heißt der erste Summand?: \n") # input user: name of summand
+        if str(storedMatrices.get(summand1)) == "None":   # check if matrix is in dictonary
+            print("Die Matrix existiert nicht!")
+
+        summand2 = input("Wie heißt der zweite Summand?: \n") # input user: name of summand
+        if str(storedMatrices.get(summand2)) == "None":   # check if matrix is in dictonary
+            print("Die Matrix existiert nicht!")
+            
+        sum = storedMatrices.pop(summand1) + storedMatrices.pop(summand2)
+        print(sum)
+
+        print("Press Enter to get back!")
+        input()
+        break
+    
+#=========================subMatrix============================#
+def sub_matrix():
+    os.system("cls")
+    while True:
+        minuend = input("Wie heißt der Minuend?: \n") # input user: name of minuend
+        if str(storedMatrices.get(minuend)) == "None":   # check if matrix is in dictonary
+            print("Die Matrix existiert nicht!")
+
+        subtrahend = input("Wie heißt der Subtrahend?: \n") # input user: name of subtrahend
+        if str(storedMatrices.get(subtrahend)) == "None":   # check if matrix is in dictonary
+            print("Die Matrix existiert nicht!")
+           
+        difference = storedMatrices.pop(minuend) - storedMatrices.pop(subtrahend)
+        print(difference)
+
+        print("Press Enter to get back!")
+        input()
+        break
+
+#=========================mulMatrix============================#
+def mul_matrix():
+    os.system("cls")
+    while True:
+        factor1 = input("Wie heißt der erste Faktor?: \n") # input user: name of summand
+        if str(storedMatrices.get(factor1)) == "None":   # check if matrix is in dictonary
+            print("Die Matrix existiert nicht!")
+
+        factor2 = input("Wie heißt der zweite Faktor?: \n") # input user: name of summand
+        if str(storedMatrices.get(factor2)) == "None":   # check if matrix is in dictonary
+            print("Die Matrix existiert nicht!")
+            
+        product = storedMatrices.pop(factor1) + storedMatrices.pop(factor2)
+        print(product)
+
+        print("Press Enter to get back!")
+        input()
+        break
+
+#=========================eqMatrix=============================#
+def eq_matrix():
+    pass
+
 ################################################################
 # Main Programm                                                #
 ################################################################
+
+A = MatrixClass(3, 3)
+
+for i in range(A.get_rows()):
+    for j in range(A.get_columns()):
+        A.set_value(i+1, j+1, i*A.get_rows() + j)
+
+B = MatrixClass(3, 3)
+
+for i in range(B.get_rows()):
+    for j in range(B.get_columns()):
+        B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
+
+
+storedMatrices["matA"] = A
+
+storedMatrices["matB"] = B
+
+
+
+
+
 intro() # das muss mark korrigieren!!
 while True:
     os.system("cls") # clears screen
@@ -283,7 +397,7 @@ Wähle die Nummer für die gewünschte Operation!\n")
             pass
 
         case "3":
-            pass
+            operation_manager()
 
         case "4":
             pass
@@ -299,24 +413,6 @@ Wähle die Nummer für die gewünschte Operation!\n")
 
         case _: # for every wrong input the main menu will load again
             pass
-
-
-# A = MatrixClass(3, 3)
-
-# for i in range(A.get_rows()):
-#     for j in range(A.get_columns()):
-#         A.set_value(i+1, j+1, i*A.get_rows() + j)
-
-# B = MatrixClass(3, 3)
-
-# for i in range(B.get_rows()):
-#     for j in range(B.get_columns()):
-#         B.set_value(i+1, j+1, i*B.get_rows() + j - 18)
-
-
-# storedMatrices["matA"] = A
-
-# storedMatrices["matB"] = B
 
 print(storedMatrices.get("matA"))
 change_matrix_value()
