@@ -209,25 +209,50 @@ def change_matrix_name():
 
 #=========================showMatrix===========================#
 def show_matrix():
-    os.system("cls") # clears screen
+    while True:
+        os.system("cls") # clears screen
 
-    print("Folgende Matrizen wurden angelegt:")
-    for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrix keys
+        print("Folgende Matrizen wurden angelegt:")
+        for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrix keys
 
-    choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
+        choice = input("\nWelche Matrix möchtest du anzeigen?\n").strip()
 
-    if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
-        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
+        if str(storedMatrices.get(choice)) != "None": # checks if matrix exists
+            print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the matrix
 
-    else:
-        print("Die eingegebene Matrix existiert nicht")
+        else:
+            print("Die eingegebene Matrix existiert nicht")
 
-    input("\nDrücke eine Taste, um zum Menü zurückzukehren") # waits until user presses a key
+        print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
+        if input() == "Y": pass # repeats show_matrix if Y
+        else: return # return to menu
 
 #===================changeMatrixValue===========================#
-def change_matrix_value():
-    pass
+def change_matrix_value(): 
+    choice = input("In welcher Martix soll ein Wert geändert werden?\n") # user input matrix name
+    if str(storedMatrices.get(choice)) == "None": # compare if entered matrix name excists in the library
+        print("Die Matrix existiert nicht") 
+        input()
+        return
+    
+    tempMat = storedMatrices.get(choice) # temporary matrix is created and selected matrix which is inserted
+    
+    row = int(input("In welcher Zeile der Martix soll ein Wert geändert werden?\n")) # user input matrix row
 
+    if row < 1 or row > tempMat.get_rows(): # if row is lower than 1 or select row is larger than given row
+        print("Die Matrix besitzt nicht so viele Zeilen") 
+        input()
+        return
+    
+    column = int(input("In welcher Spalte der Martix soll ein Wert geändert werden?\n")) # user input matrix column
+    if column < 1 or column > tempMat.get_columns(): # if column is lower than 1 or select column is larger than given column
+        print("Die Matrix besitzt nicht so viele Spalten")
+        input()
+        return
+    
+    value = int(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
+    
+    storedMatrices.get(choice).set_value(row,column,value) # library matrix is overwritten with the new value
 #=======================deleteMatrix===========================#
 def delete_matrix():
     pass
@@ -293,6 +318,9 @@ Wähle die Nummer für die gewünschte Operation!\n")
 
 # storedMatrices["matB"] = B
 
-# show_matrix()
+print(storedMatrices.get("matA"))
+change_matrix_value()
+print(storedMatrices.get("matA"))
+input()
 #=========================SubCaption===========================#
 
