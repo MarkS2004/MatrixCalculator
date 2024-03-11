@@ -141,7 +141,8 @@ class MatrixClass:
 ################################################################
 MAX_SIZE_OF_Matrix = 10
 
-storedMatrices = {"emptyMatrix": MatrixClass(3,3)}
+storedMatrices = {"emergMat": MatrixClass(3,3)} 
+# emergency Matrix for if the user is forced to choose a matrix
 
 ################################################################
 # Functions                                                    #
@@ -222,7 +223,7 @@ Wähle eine Zahl:""")
 #===============FunctionsForVariableManagment==================#
 
 #---------------------InputExistingMatrix----------------------#
-def input_existing_matrix():
+def input_not_existing_matrix():
     """brief: this functions inputs matrix name,
     checks if matrix exists,
     returns valid matrix name"""
@@ -236,7 +237,7 @@ def input_existing_matrix():
         else: return name # return valid matrix name
 
 #--------------------InputNotExistingMatrix--------------------#
-def input_not_existing_matrix():
+def input_existing_matrix():
     """brief: this functions inputs matrix name,
     checks if matrix does not exist,
     returns valid matrix name"""
@@ -295,7 +296,7 @@ def input_matrix():
     while True:
         os.system("cls") # clears screen
         print("Wie soll die Matrix heißen?")
-        name = input_existing_matrix()
+        name = input_not_existing_matrix()
 
         os.system("cls") # clears screen
         print("Wie viele Zeilen soll die Matrix haben?")
@@ -347,7 +348,7 @@ def change_matrix_name():
     print_created_matrices()
 
     print("Wie heißt die Matrix, bei der der Name geändert werden soll?")
-    choice = input_not_existing_matrix()
+    choice = input_existing_matrix()
     
     name = input("Was ist der neue Name der Matrix?\n>").strip() 
     storedMatrices[name] = storedMatrices.pop(choice)
@@ -361,7 +362,7 @@ def show_matrix():
         print_created_matrices()
 
         print("\nWelche Matrix möchtest du anzeigen?")
-        choice = input_not_existing_matrix()
+        choice = input_existing_matrix()
         print(f"{choice} =\n {storedMatrices.get(choice)}")
 
         print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
@@ -384,7 +385,7 @@ def delete_matrix():
         print_created_matrices()
 
         print("\nWelche Matrix möchtest du löschen?")
-        choice = input_not_existing_matrix()
+        choice = input_existing_matrix()
 
         del storedMatrices[choice] # delets the selected matrix
 
@@ -405,13 +406,13 @@ def add_matrix():
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der erste Summand?")
-        summand1 = input_not_existing_matrix()
+        summand1 = input_existing_matrix()
         summand1 = storedMatrices.get(summand1) # convert to object
 
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der zweite Summand?")
-        summand2 = input_not_existing_matrix()
+        summand2 = input_existing_matrix()
         summand2 = storedMatrices.get(summand2) # convert to object
 
         if( (summand1.get_columns() == summand2.get_columns())\
@@ -437,13 +438,13 @@ def sub_matrix():
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der Minuend?")
-        minuend = input_not_existing_matrix()
+        minuend = input_existing_matrix()
         minuend = storedMatrices.get(minuend) # convert to object
 
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der Subtrahend?")
-        subtrahend = input_not_existing_matrix()
+        subtrahend = input_existing_matrix()
         subtrahend = storedMatrices.get(subtrahend) # convert to object
 
         if( (minuend.get_columns() == subtrahend.get_columns())\
@@ -469,13 +470,13 @@ def mul_matrix():
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der erste Faktor?")
-        factor1 = input_not_existing_matrix()
+        factor1 = input_existing_matrix()
         factor1 = storedMatrices.get(factor1) # convert to object
 
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der zweite Faktor?")
-        factor2 = input_not_existing_matrix()
+        factor2 = input_existing_matrix()
         factor2 = storedMatrices.get(factor2) # convert to object
 
         if( (factor1.get_columns() == factor2.get_rows())\
@@ -510,7 +511,7 @@ def change_matrix_value():
     print_created_matrices()
 
     print("\nBei welcher Martix soll der Wert geändert werden?")
-    choice = input_not_existing_matrix()
+    choice = input_existing_matrix()
 
     os.system("cls") # clears screen
     print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
@@ -551,7 +552,7 @@ while True:
 (3) Matrix transponieren
 (4) Determinate berechnen
 
-(0) Programm schließen
+(0) Programm beenden
 
 Wähle eine Zahl:""")
 
