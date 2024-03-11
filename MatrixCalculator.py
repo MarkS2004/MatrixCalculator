@@ -141,7 +141,8 @@ class MatrixClass:
 ################################################################
 MAX_SIZE_OF_Matrix = 10
 
-storedMatrices = {"emergMat": MatrixClass(3,3)} 
+NAME_EMERG_MAT = "emergMat"
+storedMatrices = {NAME_EMERG_MAT: MatrixClass(3,3)} 
 # emergency Matrix for if the user is forced to choose a matrix
 
 ################################################################
@@ -366,7 +367,7 @@ def show_matrix():
         print(f"{choice} =\n {storedMatrices.get(choice)}")
 
         print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
-        if input() == "Y": pass # repeats show_matrix if Y
+        if input(">") == "Y": pass # repeats show_matrix if Y
         else: return # return to menu
 
 #----------------------printCreatedMatrices--------------------#
@@ -378,7 +379,7 @@ def print_created_matrices():
 
 #-------------------------deleteMatrix-------------------------#
 def delete_matrix():
-    """brief: this function lets the user delet a matrix"""
+    """brief: this function lets the user delete a matrix"""
 
     while True:
         os.system("cls") # clears screen
@@ -387,13 +388,19 @@ def delete_matrix():
         print("\nWelche Matrix möchtest du löschen?")
         choice = input_existing_matrix()
 
-        del storedMatrices[choice] # delets the selected matrix
+        # safety mechanism so that the user can always chose a matrix
+        if choice == NAME_EMERG_MAT: 
+            os.system("cls") # clears screen
+            print(f"Die Matrix: {choice} darf nicht gelöscht werden\n")
 
-        os.system("cls") # clears screen
-        print(f"Die Matrix:{choice} wurde erfolgreich gelöscht\n")
+        else:
+            del storedMatrices[choice] # delets the selected matrix
 
-        print("\nMöchtes du eine weitere Matrix löschen?(Y/N)") 
-        if input() == "Y": pass # repeats delete_matrix if Y
+            os.system("cls") # clears screen
+            print(f"Die Matrix: {choice} wurde erfolgreich gelöscht\n")
+
+        print("\nMöchtes du eine andere Matrix löschen?(Y/N)") 
+        if input(">") == "Y": pass # repeats delete_matrix if Y
         else: return # return to menu
 
 #===================FunctionsForOperations=====================#
