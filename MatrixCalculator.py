@@ -23,6 +23,8 @@ import os
 class MatrixClass:
 #=========================Constructor==========================#
     def __init__(self, rows, columns):
+        """brief: initializes a matrix"""
+
         if not type(rows) is int: # check if rows is interger
             raise TypeError("rows must be integers")
         
@@ -48,6 +50,8 @@ class MatrixClass:
 
 #==========================Setter==============================#
     def set_value(self, row, column, value):
+        """brief: sets a value in a matrix"""
+
         if (not type(value) is int) and (not type(value) is float): # check if value is integer or float
             raise TypeError("value must be integer or float")
         
@@ -64,6 +68,8 @@ class MatrixClass:
 
 #=====================StringRepresentation=====================#
     def __str__(self):
+        """brief: ouput of matrix if represented as string"""
+
         outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix
 
         for i in range(self._rows):
@@ -80,6 +86,7 @@ class MatrixClass:
         
 #=========================AddMethod============================#
     def __add__(self, other):
+        """brief: adds two matrices"""
 
         if self._rows == other._rows and self._columns == other._columns: # checks if matrices are the same size
 
@@ -96,7 +103,8 @@ class MatrixClass:
 
 #=========================SubMethod============================#
     def __sub__(self, other):
-        
+        """brief: substacts two matrices"""
+
         if self._rows == other._rows and self._columns == other._columns: # checks if matrices are the same size
 
             result = MatrixClass(self._rows, self._columns)
@@ -112,6 +120,7 @@ class MatrixClass:
 
 #==========================MulMethod===========================#
     def __mul__(self, other):
+        """brief: multiplies two matrices"""
 
         if self._rows == other._columns and self._columns == other._rows:
              
@@ -534,7 +543,7 @@ menu_welcome()
 while True:
     os.system("cls") # clears screen
 
-    print(
+    print( 
 """Hauptmenü
 -----------------------------------------------------
 (1) Variablenmanager (anlegen, anzeigen, löschen ...)
