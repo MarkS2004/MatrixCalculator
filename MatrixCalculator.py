@@ -137,7 +137,7 @@ class MatrixClass:
             raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
         
 ################################################################
-# Variables, Constants                                         #
+# Variables, Constants, Objects                                #
 ################################################################
 MAX_SIZE_OF_Matrix = 10
 
@@ -181,11 +181,11 @@ def submenu_variable_manager():
 (2) Matrix anzeigen
 (3) Matrix löschen
 (4) Name ändern
-(5) Werte ändern
+(5) Wert ändern
 
 (0) Zurück zum Hauptmenü
 
-Wähle eine Zahl:""")
+Wähle eine Nummer:""")
         
         match input(">").strip(): # selction of the differnt Choices to change the matrices 
             case "1": input_matrix()
@@ -212,7 +212,7 @@ def submenu_operation_manager():
 
 (0) Zurück zum Hauptmenü
 
-Wähle eine Zahl:""")
+Wähle eine Nummer:""")
         
         match input(">").strip(): # selction of operations 
             case "1": add_matrix()
@@ -252,42 +252,42 @@ def input_existing_matrix():
         else: return name # return valid matrix name
 
 #-----------------------InputMatrixRows------------------------#
-def input_matrix_rows():
-    """brief: this function takes user input for rows,
-    returns valid number of rows"""
+def input_matrix_row(max_size):
+    """brief: this function takes user input for row,
+    returns valid number for row"""
 
     while True:
-        rows = input(">").strip()
+        row = input(">").strip()
         try:
-            rows = int(rows) # try to convert to int
+            row = int(row) # try to convert to int
         except ValueError:
-            print("\n!!! Die Anzahl an Zeilen muss eine Ganzzahl sein !!!")
+            print("\n!!! Der Wert für die Zeile(n) muss muss eine Ganzzahl sein !!!")
         else:
-            if rows < 1 or rows > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
-                print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
+            if row < 1 or row > max_size: #checks if Matrix is to big
+                print(f"\n!!! Der Wert für die Zeile(n) muss zwischen 1 und {max_size} liegen !!!")
 
-            else: return rows
+            else: return row
                 
-        print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
+        print("\nBitte gebe die Zeile(n) erneut ein:")
 
-#---------------------InputMatrixColumns-----------------------#
-def input_matrix_column():
+#----------------------InputMatrixColumn-----------------------#
+def input_matrix_column(max_size):
     """brief: this function takes user input for columns,
     returns valid number of columns"""
 
     while True:
-        columns = input(">").strip()
+        column = input(">").strip()
         try:
-            columns = int(columns) # try to convert to int
+            column = int(column) # try to convert to int
         except ValueError:
-            print("\n!!! Die Anzahl an Spalten muss eine Ganzzahl sein !!!")
+            print("\n!!! Der Wert für die Spalte(n) muss muss eine Ganzzahl sein !!!")
         else:
-            if columns < 1 or columns > MAX_SIZE_OF_Matrix: #checks if Matrix is to big
-                print(f"\n!!! Die Anzahl an Zeilen muss zwischen 1 und {MAX_SIZE_OF_Matrix} liegen !!!")
+            if column < 1 or column > max_size: #checks if Matrix is to big
+                print(f"\n!!! Der Wert für die Spalte(n) muss zwischen 1 und {max_size} liegen !!!")
 
-            else: return columns
+            else: return column
                 
-        print("\nBitte gebe die Anzahl an gewünschten Zeilen erneut ein:")
+        print("\nBitte gebe die Spalte(n) erneut ein:")
 
 #------------------------InputMatrix---------------------------#
 def input_matrix():
@@ -301,11 +301,11 @@ def input_matrix():
 
         os.system("cls") # clears screen
         print("Wie viele Zeilen soll die Matrix haben?")
-        rows = input_matrix_rows()
+        rows = input_matrix_row(MAX_SIZE_OF_Matrix)
 
         os.system("cls") # clears screen
         print("Wie viele Spalten soll die Matrix haben?")
-        columns = input_matrix_column()
+        columns = input_matrix_column(MAX_SIZE_OF_Matrix)
 
         # create and store Matrix
         storedMatrices[name] = MatrixClass(rows, columns)
@@ -353,6 +353,62 @@ def change_matrix_name():
     
     name = input("Was ist der neue Name der Matrix?\n>").strip() 
     storedMatrices[name] = storedMatrices.pop(choice)
+
+#--------------------ChangeMatrixValue-------------------------#
+def change_matrix_value():
+    """brief: this fuction lets the user change a given value"""
+
+    while True:
+        os.system("cls") # clears screen
+        print_created_matrices()
+
+        # input existing matrix
+        print("\nBei welcher Martix soll der Wert geändert werden?")
+        choice = input_existing_matrix()
+
+        tempMat = storedMatrices.get(choice) # temporary matrix is created
+
+        # input row
+        os.system("cls") # clears screen
+        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
+        print("\nIn welcher Zeile der Martix soll der Wert geändert werden?")
+
+        row = input_matrix_row(tempMat.get_rows())
+
+        # input column
+        os.system("cls") # clears screen
+        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
+        print("\nIn welcher Spalte der Martix soll der Wert geändert werden?")
+
+        column = input_matrix_column(tempMat.get_columns())
+
+        # input value
+        os.system("cls") # clears screen
+        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
+        print(f"\nAuf welchen Wert soll das Element an Stelle {row}, {column} geändert werden?")
+
+        while True:
+            value = input(">").strip()
+            try:
+                value = float(value) # try to convert to float
+            except ValueError:
+                print("\n!!! Der Wert muss eine Ganz- oder Gleitkommzahl sein !!!")
+            else: break
+
+            print("\nBitte gebe den neuen Wert erneut ein:")
+
+        #change Value
+        storedMatrices.get(choice).set_value(row,column,value)
+
+        # print the result
+        os.system("cls") # clears screen
+        print("Die Matrix wurde auf folgendens geändert:\n")
+        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the new matrix
+
+        # ask if the user wants to repeat the process
+        print("\nMöchtest du einen anderen Wert in einer Matrix ändern?(Y/N)") 
+        if input(">") == "Y": pass # repeats change_matrix_value if Y
+        else: return # return to menu
 
 #-------------------------showMatrix---------------------------#
 def show_matrix():
@@ -433,8 +489,8 @@ def add_matrix():
         else:
             print("\n!!! Die Matrizen konnten nicht addiert werden,da sie nicht von gleicher Größe sind !!!\n")
             
-        print("\nMöchtest du eine weitere Matrix addieren?(Y/N)\n>") 
-        if input() == "Y": pass # repeats add_matrix if Y
+        print("\nMöchtest du eine weitere Matrix addieren?(Y/N)") 
+        if input(">") == "Y": pass # repeats add_matrix if Y
         else: return # return to menu
 
 #---------------------------subMatrix--------------------------#
@@ -465,11 +521,11 @@ def sub_matrix():
         else:
             print("\n!!! Die Matrizen konnten nicht subtrahiert werden,da sie nicht von gleicher Größe sind !!!\n")
             
-        print("\nMöchtest du eine weitere Matrix subtrahieren?(Y/N)\n>") 
-        if input() == "Y": pass # repeats sub_matrix if Y
+        print("\nMöchtest du eine weitere Matrix subtrahieren?(Y/N)") 
+        if input(">") == "Y": pass # repeats sub_matrix if Y
         else: return # return to menu
 
-#=========================mulMatrix============================#
+#---------------------------mulMatrix--------------------------#
 def mul_matrix():
     """"brief: this function lets the user multiply two matrices"""
 
@@ -497,50 +553,9 @@ def mul_matrix():
         else:
             print("\n!!! Die Matrizen konnten nicht muliplizert werden,\nda die Zeilen des ersten Faktores nicht mit den Spalten\ndes zweiten Faktors übereinstimmen (und andersherum) !!!\n")
             
-        print("\nMöchtest du eine weitere Matrix multiplizieren?(Y/N)\n>") 
-        if input() == "Y": pass # repeats mul_matrix if Y
+        print("\nMöchtest du eine weitere Matrix multiplizieren?(Y/N)") 
+        if input(">") == "Y": pass # repeats mul_matrix if Y
         else: return # return to menu
-
-
-
-
-
-
-
-
-
-
-#------------------------ChangeMatrixValue---------------------#
-def change_matrix_value():
-    """brief: this fuction lets the user change a given value"""
-
-    os.system("cls") # clears screen
-    print_created_matrices()
-
-    print("\nBei welcher Martix soll der Wert geändert werden?")
-    choice = input_existing_matrix()
-
-    os.system("cls") # clears screen
-    print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
-    
-    tempMat = storedMatrices.get(choice) # temporary matrix is created
-    
-    row = int(input("\nIn welcher Zeile der Martix soll der Wert geändert werden?\n")) # user input matrix row
-
-    if row < 1 or row > tempMat.get_rows(): # if row is lower than 1 or select row is larger than given row
-        print("Die Matrix besitzt nicht so viele Zeilen") 
-        input()
-        return
-    
-    column = int(input("In welcher Spalte der Martix soll der Wert geändert werden?\n")) # user input matrix column
-    if column < 1 or column > tempMat.get_columns(): # if column is lower than 1 or select column is larger than given column
-        print("Die Matrix besitzt nicht so viele Spalten")
-        input()
-        return
-    
-    value = float(input("Gebe den zu ändernden Wert ein:\n")) # user input matrix value
-    
-    storedMatrices.get(choice).set_value(row,column,value) # library matrix is overwritten with the new value
 
 ################################################################
 # Main Programm/Menu                                           #
@@ -561,7 +576,7 @@ while True:
 
 (0) Programm beenden
 
-Wähle eine Zahl:""")
+Wähle eine Nummer:""")
 
     match input(">").strip():
         case "1": submenu_variable_manager() 
