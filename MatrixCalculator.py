@@ -150,7 +150,7 @@ storedMatrices = {NAME_EMERG_MAT: MatrixClass(3,3)}
 ################################################################
         
 #========================MenuFunctions=========================#
-        
+
 #------------------------WelcomeMenu---------------------------#
 def menu_welcome():
     """brief: this function prints a welcoming message,
@@ -221,8 +221,9 @@ Wähle eine Nummer:""")
             case "0": return
             case _: pass
 
-#===============FunctionsForVariableManagment==================#
 
+#===============FunctionsForVariableManagment==================#
+            
 #---------------------InputExistingMatrix----------------------#
 def input_not_existing_matrix():
     """brief: this functions inputs matrix name,
@@ -459,6 +460,7 @@ def delete_matrix():
         if input(">") == "Y": pass # repeats delete_matrix if Y
         else: return # return to menu
 
+
 #===================FunctionsForOperations=====================#
 
 #---------------------------addMatrix--------------------------#
@@ -583,5 +585,7 @@ Wähle eine Nummer:""")
         case "2": submenu_operation_manager()
         case "3": pass
         case "4": pass
-        case "0": break
+        case "0":
+            if input("\nMöchtest du das Programm wirklich beenden?(Y/N)\n>") == "Y": break
+            else: pass
         case _: pass
