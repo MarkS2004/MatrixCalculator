@@ -180,7 +180,7 @@ def submenu_variable_manager():
 (1) Matrix eingeben
 (2) Matrix anzeigen
 (3) Matrix löschen
-(4) Name ändern
+(4) Namen ändern
 (5) Wert ändern
 
 (0) Zurück zum Hauptmenü
@@ -346,14 +346,24 @@ def input_matrix():
 def change_matrix_name():
     """brief: this function lets the user change the name of a matrix"""
     
-    os.system("cls") # clears screen
-    print_created_matrices()
+    while True:
+        os.system("cls") # clears screen
+        print_created_matrices()
 
-    print("Wie heißt die Matrix, bei der der Name geändert werden soll?")
-    choice = input_existing_matrix()
-    
-    name = input("Was ist der neue Name der Matrix?\n>").strip() 
-    storedMatrices[name] = storedMatrices.pop(choice)
+        print("\nWie heißt die Matrix, bei der der Name geändert werden soll?")
+        choice = input_existing_matrix()
+
+        if choice == NAME_EMERG_MAT: # so one cant change name and later delete the emergMat
+                print(f"!!! Der Name der Matrix: {choice} darf nicht geändert werden !!!\n")
+
+        else:
+            name = input("\nAuf was soll die Matrix umbenannt werden?\n>").strip() 
+            storedMatrices[name] = storedMatrices.pop(choice)
+            print(f"\nDie Matrix wurde erfolgreich von {choice} auf {name} umbenannt")
+
+        print("\nMöchtes du eine den Namen einer anderen Matrix änderen?(Y/N)") 
+        if input(">") == "Y": pass # repeats show_matrix if Y
+        else: return # return to menu
 
 #--------------------ChangeMatrixValue-------------------------#
 def change_matrix_value():
@@ -448,7 +458,7 @@ def delete_matrix():
         # safety mechanism so that the user can always chose a matrix
         if choice == NAME_EMERG_MAT: 
             os.system("cls") # clears screen
-            print(f"Die Matrix: {choice} darf nicht gelöscht werden\n")
+            print(f"!!! Die Matrix: {choice} darf nicht gelöscht werden !!!\n")
 
         else:
             del storedMatrices[choice] # delets the selected matrix
@@ -559,6 +569,7 @@ def mul_matrix():
         if input(">") == "Y": pass # repeats mul_matrix if Y
         else: return # return to menu
 
+
 ################################################################
 # Main Programm/Menu                                           #
 ################################################################
@@ -569,7 +580,7 @@ while True:
     os.system("cls") # clears screen
 
     print( 
-"""Hauptmenü
+"""Hauptmenü 
 -----------------------------------------------------
 (1) Variablenmanager (anlegen, anzeigen, löschen ...)
 (2) Mathematische Grundoperationen (+,-,*)
@@ -589,3 +600,8 @@ Wähle eine Nummer:""")
             if input("\nMöchtest du das Programm wirklich beenden?(Y/N)\n>") == "Y": break
             else: pass
         case _: pass
+
+        #TODO: Save Function for saving Matrix from addition
+        #TODO: (Scalar Multiplication)
+        #TODO: transpone Matrix
+        #TODO: calculate determint
