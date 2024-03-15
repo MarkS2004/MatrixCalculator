@@ -142,7 +142,7 @@ class MatrixClass:
 MAX_SIZE_OF_Matrix = 10
 
 NAME_EMERG_MAT = "emergMat"
-storedMatrices = {NAME_EMERG_MAT: MatrixClass(3,3)} 
+stored_matrices = {NAME_EMERG_MAT: MatrixClass(1,1)} # dictionary
 # emergency Matrix for if the user is forced to choose a matrix
 
 ################################################################
@@ -177,7 +177,7 @@ def submenu_variable_manager():
         print(
 """Variablenmanager
 -----------------------------------------------------
-(1) Matrix eingeben
+(1) Matrix anlegen
 (2) Matrix anzeigen
 (3) Matrix löschen
 (4) Namen ändern
@@ -204,7 +204,7 @@ def submenu_operation_manager():
     while True:
         os.system("cls") # clears screen
         print(
-""" Variablenmanager
+"""Operationsmanager
 -----------------------------------------------------
 (1) Matrizen addieren
 (2) Matrizen subtrahieren
@@ -233,7 +233,7 @@ def input_not_existing_matrix():
     while True:
         name = input(">").strip()
 
-        if str(storedMatrices.get(name)) != "None": # checks if matrix exists
+        if str(stored_matrices.get(name)) != "None": # checks if matrix exists
             print("\n!!! Die Matrix existiert bereits !!!")
             print("\nBite gebe einen anderen Namen ein:")
         else: return name # return valid matrix name
@@ -247,7 +247,7 @@ def input_existing_matrix():
     while True:
         name = input(">").strip()
 
-        if str(storedMatrices.get(name)) == "None": # checks if matrix does not exist
+        if str(stored_matrices.get(name)) == "None": # checks if matrix does not exist
             print("\n!!! Die Matrix existiert nicht !!!")
             print("\nBite gebe einen anderen Namen ein:")
         else: return name # return valid matrix name
@@ -309,7 +309,7 @@ def input_matrix():
         columns = input_matrix_column(MAX_SIZE_OF_Matrix)
 
         # create and store Matrix
-        storedMatrices[name] = MatrixClass(rows, columns)
+        stored_matrices[name] = MatrixClass(rows, columns)
 
         # Input Values
         for i in range(1,rows+1):
@@ -317,7 +317,7 @@ def input_matrix():
                 while True:
                     os.system("cls")
 
-                    print(f"{name} =\n {storedMatrices.get(name)}") # prints unfinished matrix
+                    print(f"{name} =\n {stored_matrices.get(name)}") # prints unfinished matrix
 
                     value = input(f"Welchen Wert soll das Element an Stelle {i}, {j} haben?\n>").strip()
                     
@@ -330,12 +330,12 @@ def input_matrix():
                         break # goes to next element
                 
 
-                storedMatrices.get(name).set_value(i ,j ,value) # sets Value at Element i, j
+                stored_matrices.get(name).set_value(i ,j ,value) # sets Value at Element i, j
 
         # Show Result
         os.system("cls")
         print("Folgende Matrix wurde angelegt:")
-        print(f"{name} =\n {storedMatrices.get(name)}")
+        print(f"{name} =\n {stored_matrices.get(name)}")
 
         # Try Again
         print("\nMöchtes du eine weitere Matrix anlegen?(Y/N)") 
@@ -354,14 +354,14 @@ def change_matrix_name():
         choice = input_existing_matrix()
 
         if choice == NAME_EMERG_MAT: # so one cant change name and later delete the emergMat
-                print(f"!!! Der Name der Matrix: {choice} darf nicht geändert werden !!!\n")
+                print(f"\n!!! Der Name der Matrix: {choice} darf nicht geändert werden !!!")
 
         else:
             name = input("\nAuf was soll die Matrix umbenannt werden?\n>").strip() 
-            storedMatrices[name] = storedMatrices.pop(choice)
+            stored_matrices[name] = stored_matrices.pop(choice)
             print(f"\nDie Matrix wurde erfolgreich von {choice} auf {name} umbenannt")
 
-        print("\nMöchtes du eine den Namen einer anderen Matrix änderen?(Y/N)") 
+        print("\nMöchtes du den Namen einer anderen Matrix änderen?(Y/N)") 
         if input(">") == "Y": pass # repeats show_matrix if Y
         else: return # return to menu
 
@@ -377,25 +377,25 @@ def change_matrix_value():
         print("\nBei welcher Martix soll der Wert geändert werden?")
         choice = input_existing_matrix()
 
-        tempMat = storedMatrices.get(choice) # temporary matrix is created
+        tempMat = stored_matrices.get(choice) # choice matrix is converted to object
 
         # input row
         os.system("cls") # clears screen
-        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
+        print(f"{choice} =\n {tempMat}") # prints the selected matrix
         print("\nIn welcher Zeile der Martix soll der Wert geändert werden?")
 
         row = input_matrix_row(tempMat.get_rows())
 
         # input column
         os.system("cls") # clears screen
-        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
+        print(f"{choice} =\n {tempMat}") # prints the selected matrix
         print("\nIn welcher Spalte der Martix soll der Wert geändert werden?")
 
         column = input_matrix_column(tempMat.get_columns())
 
         # input value
         os.system("cls") # clears screen
-        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the selected matrix
+        print(f"{choice} =\n {tempMat}") # prints the selected matrix
         print(f"\nAuf welchen Wert soll das Element an Stelle {row}, {column} geändert werden?")
 
         while True:
@@ -409,12 +409,12 @@ def change_matrix_value():
             print("\nBitte gebe den neuen Wert erneut ein:")
 
         #change Value
-        storedMatrices.get(choice).set_value(row,column,value)
+        tempMat.set_value(row,column,value)
 
         # print the result
         os.system("cls") # clears screen
         print("Die Matrix wurde auf folgendens geändert:\n")
-        print(f"{choice} =\n {storedMatrices.get(choice)}") # prints the new matrix
+        print(f"{choice} =\n {tempMat}") # prints the new matrix
 
         # ask if the user wants to repeat the process
         print("\nMöchtest du einen anderen Wert in einer Matrix ändern?(Y/N)") 
@@ -431,7 +431,8 @@ def show_matrix():
 
         print("\nWelche Matrix möchtest du anzeigen?")
         choice = input_existing_matrix()
-        print(f"{choice} =\n {storedMatrices.get(choice)}")
+        os.system("cls")
+        print(f"{choice} =\n {stored_matrices.get(choice)}")
 
         print("\nMöchtes du eine weitere Matrix anzeigen?(Y/N)") 
         if input(">") == "Y": pass # repeats show_matrix if Y
@@ -442,7 +443,7 @@ def print_created_matrices():
     """brief: this fuctions prints a list of all created functions"""
 
     print("Folgende Matrizen wurden angelegt:")
-    for i in storedMatrices.keys(): print(f"- {i}") # prints a list of all matrices
+    for i in stored_matrices.keys(): print(f"- {i}") # prints a list of all matrices
 
 #-------------------------deleteMatrix-------------------------#
 def delete_matrix():
@@ -457,19 +458,50 @@ def delete_matrix():
 
         # safety mechanism so that the user can always chose a matrix
         if choice == NAME_EMERG_MAT: 
-            os.system("cls") # clears screen
-            print(f"!!! Die Matrix: {choice} darf nicht gelöscht werden !!!\n")
+            print(f"\n!!! Die Matrix: {choice} darf nicht gelöscht werden !!!")
 
         else:
-            del storedMatrices[choice] # delets the selected matrix
+            del stored_matrices[choice] # delets the selected matrix
 
-            os.system("cls") # clears screen
-            print(f"Die Matrix: {choice} wurde erfolgreich gelöscht\n")
+            print(f"\nDie Matrix: {choice} wurde erfolgreich gelöscht")
 
         print("\nMöchtes du eine andere Matrix löschen?(Y/N)") 
         if input(">") == "Y": pass # repeats delete_matrix if Y
         else: return # return to menu
 
+#-------------------------saveMatrix---------------------------#
+def save_matrix(result):
+    """brief: this function lets the user save a given result matrix"""
+    
+    print("\nMöchtest du die Ergebnismatrix speichern?(Y/N)")
+
+    while True:
+        
+        if input(">").strip() == "Y":
+
+            os.system("cls")
+            print("\nUnter welchem Namen soll die Matrix gespeichert werden?")
+            name = input(">").strip()
+
+            if str(stored_matrices.get(name)) == "None": # checks if Matrix does not exist
+                stored_matrices[name] = result # saves Matrix
+
+                print(f"\nDas Ergebnis wurde erfolreich in der Matrix: {name} gespeichert")
+                return #leaves the function
+            else:
+                print(f"\n Die Matrix: {name} existiert bereits, möchtest du diese überschreiben?(Y/N)")
+
+                if input(">").strip() == "Y":
+                    stored_matrices.update({name: result}) # replaces old Matrix with new one
+
+                    print(f"\nDas Ergebnis wurde erfolreich in der Matrix: {name} gespeichert")
+                    return #leave function
+                
+                else: pass
+
+        else: return
+
+        print("\nMöchtest du die Ergebnismatrix unter einem anderem Namen abspeichern?(Y/N)") # retry to save matrix
 
 #===================FunctionsForOperations=====================#
 
@@ -482,13 +514,13 @@ def add_matrix():
         print_created_matrices()
         print("\nWelche Matrix ist der erste Summand?")
         summand1 = input_existing_matrix()
-        summand1 = storedMatrices.get(summand1) # convert to object
+        summand1 = stored_matrices.get(summand1) # convert to object
 
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der zweite Summand?")
         summand2 = input_existing_matrix()
-        summand2 = storedMatrices.get(summand2) # convert to object
+        summand2 = stored_matrices.get(summand2) # convert to object
 
         if( (summand1.get_columns() == summand2.get_columns())\
             and (summand1.get_rows() == summand2.get_rows()) ):
@@ -500,7 +532,9 @@ def add_matrix():
 
         else:
             print("\n!!! Die Matrizen konnten nicht addiert werden,da sie nicht von gleicher Größe sind !!!\n")
-            
+        
+        save_matrix(result) # try to save matrix
+
         print("\nMöchtest du eine weitere Matrix addieren?(Y/N)") 
         if input(">") == "Y": pass # repeats add_matrix if Y
         else: return # return to menu
@@ -514,13 +548,13 @@ def sub_matrix():
         print_created_matrices()
         print("\nWelche Matrix ist der Minuend?")
         minuend = input_existing_matrix()
-        minuend = storedMatrices.get(minuend) # convert to object
+        minuend = stored_matrices.get(minuend) # convert to object
 
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der Subtrahend?")
         subtrahend = input_existing_matrix()
-        subtrahend = storedMatrices.get(subtrahend) # convert to object
+        subtrahend = stored_matrices.get(subtrahend) # convert to object
 
         if( (minuend.get_columns() == subtrahend.get_columns())\
             and (minuend.get_rows() == subtrahend.get_rows()) ):
@@ -532,6 +566,8 @@ def sub_matrix():
 
         else:
             print("\n!!! Die Matrizen konnten nicht subtrahiert werden,da sie nicht von gleicher Größe sind !!!\n")
+        
+        save_matrix(result) # try to save matrix
             
         print("\nMöchtest du eine weitere Matrix subtrahieren?(Y/N)") 
         if input(">") == "Y": pass # repeats sub_matrix if Y
@@ -546,13 +582,13 @@ def mul_matrix():
         print_created_matrices()
         print("\nWelche Matrix ist der erste Faktor?")
         factor1 = input_existing_matrix()
-        factor1 = storedMatrices.get(factor1) # convert to object
+        factor1 = stored_matrices.get(factor1) # convert to object
 
         os.system("cls")
         print_created_matrices()
         print("\nWelche Matrix ist der zweite Faktor?")
         factor2 = input_existing_matrix()
-        factor2 = storedMatrices.get(factor2) # convert to object
+        factor2 = stored_matrices.get(factor2) # convert to object
 
         if( (factor1.get_columns() == factor2.get_rows())\
             and (factor1.get_rows() == factor2.get_columns()) ):
@@ -564,7 +600,9 @@ def mul_matrix():
 
         else:
             print("\n!!! Die Matrizen konnten nicht muliplizert werden,\nda die Zeilen des ersten Faktores nicht mit den Spalten\ndes zweiten Faktors übereinstimmen (und andersherum) !!!\n")
-            
+
+        save_matrix(result) # try to save matrix
+
         print("\nMöchtest du eine weitere Matrix multiplizieren?(Y/N)") 
         if input(">") == "Y": pass # repeats mul_matrix if Y
         else: return # return to menu
@@ -597,11 +635,12 @@ Wähle eine Nummer:""")
         case "3": pass
         case "4": pass
         case "0":
-            if input("\nMöchtest du das Programm wirklich beenden?(Y/N)\n>") == "Y": break
+            print("\nBist du dir sicher, dass du das Programm schließen möchtest?(Y/N)")
+            if input(">") == "Y": break
             else: pass
         case _: pass
 
         #TODO: Save Function for saving Matrix from addition
         #TODO: (Scalar Multiplication)
         #TODO: transpone Matrix
-        #TODO: calculate determint
+        #TODO: calculate determin
