@@ -118,11 +118,12 @@ def input_not_existing_matrix():
     while True:
         name = input(">").strip()
 
-        if str(stored_matrices.get(name)) != "None": # checks if matrix exists
-            print("\n!!! Die Matrix existiert bereits !!!")
-        else: 
-            if not bool(name): # check if matrix is empty
-                print("\n!!! Die Matrix darf nicht unbenannt sein !!!") 
+        if not bool(name): # check if name is empty
+            print("\n!!! Die Matrix darf nicht unbenannt sein !!!")
+
+        else:     
+            if str(stored_matrices.get(name)) != "None": # checks if matrix exists
+                print("\n!!! Die Matrix existiert bereits !!!")
 
             else: return name # return valid matrix name
 
