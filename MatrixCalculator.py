@@ -496,7 +496,7 @@ def save_matrix(result):
         if input(">").strip() == "Y":
 
             os.system("cls")
-            print("\nUnter welchem Namen soll die Matrix gespeichert werden?")
+            print("Unter welchem Namen soll die Matrix gespeichert werden?")
             name = input(">").strip()
 
             if str(stored_matrices.get(name)) == "None": # checks if Matrix does not exist
@@ -625,6 +625,27 @@ def mul_matrix():
         if input(">") == "Y": pass # repeats mul_matrix if Y
         else: return # return to menu
 
+#---------------------------mulMatrix--------------------------#
+def transpose_matrix():
+    """"brief: this function lets the user transpose a matrix"""
+
+    while True:
+        os.system("cls")
+        print_created_matrices()
+        print("\nWelche Matrix möchtest du transponieren?")
+        matrix = input_existing_matrix()
+        matrix = stored_matrices.get(matrix) # convert to object
+
+        result = matrix.transpose() # transpose matrix and save in result
+
+        os.system("cls")
+        print(f"Folgendes ist die transponierte Matrix:\n{result}")
+
+        save_matrix(result) # try to save matrix
+
+        print("\nMöchtest du eine weitere Matrix transponieren?(Y/N)") 
+        if input(">") == "Y": pass # repeats mul_matrix if Y
+        else: return # return to menu
 
 ################################################################
 # Main Programm/Menu                                           #
@@ -641,7 +662,6 @@ while True:
 (1) Variablenmanager (anlegen, anzeigen, löschen ...)
 (2) Mathematische Grundoperationen (+,-,*)
 (3) Matrix transponieren
-(4) Determinate berechnen
 
 (0) Programm beenden
 
@@ -650,14 +670,9 @@ Wähle eine Nummer:""")
     match input(">").strip():
         case "1": submenu_variable_manager() 
         case "2": submenu_operation_manager()
-        case "3": pass
-        case "4": pass
+        case "3": transpose_matrix() 
         case "0":
             print("\nBist du dir sicher, dass du das Programm schließen möchtest?(Y/N)")
             if input(">") == "Y": break
             else: pass
         case _: pass
-        
-        #TODO: (Scalar Multiplication)
-        #TODO: transpone Matrix
-        #TODO: calculate determin
