@@ -1,9 +1,10 @@
-# MatrixCalculator
 Lieber Leser,
 
 dieses Dokument ist eine Beilage zum Programm Code des Matrizenrechners, um diesen besser zu verstehen und nutzen zu können.
-Alle Funktionen des Programms werden im Sourcecode mithilfe von Kommentaren erklärt. 
+Alle Funktionen des Programms werden im Sourcecode mithilfe von Kommentaren erklärt.
 Der Benutzer wird durch Textausgaben sicher durch das Programm geleitet.
+
+Zum Starten des Programms muss das "main.py"-Skript ausgeführt werden. Das Programm verwendet die Pythonversion 1.12.1. 
 Nach dem Starten des Programms wird mithilfe eines Einführungstextes die grundlegende Idee des Rechners erklärt.
 Wird dann die Enter-Taste betätigt, gelangt der Benutzer in das Hauptmenü, von wo aus alle weiteren Operationen ausgewählt werden können. Diese werden durch Eingabe der beistehenden Nummer der Operation ausgewählt.
 

@@ -9,14 +9,12 @@
 # file name: main.py                                           #
 # date: 19.03.2023                                             #
 # authors: Marvin Wolff, Kemal Bagci, Mark Schaab              #
-#                                                              #
 # brief: This Program is a matrix calculator. The user can:    #
-#   o create and delete a Matrix                               #
-#   o change the name or a value from a matrix                 #
-#   o show a matrix                                            #
-#   o add, substract and multiply matrices                     #
-#   o transpose a matrix                                       #
-#                                                              #
+#        o create and delete a Matrix                          #
+#        o change the name or a value from a matrix            #
+#        o show a matrix                                       #
+#        o add, substract and multiply matrices                #
+#        o transpose a matrix                                  #
 ################################################################
 
 ################################################################
