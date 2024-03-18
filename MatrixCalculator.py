@@ -235,8 +235,13 @@ def input_not_existing_matrix():
 
         if str(stored_matrices.get(name)) != "None": # checks if matrix exists
             print("\n!!! Die Matrix existiert bereits !!!")
-            print("\nBite gebe einen anderen Namen ein:")
-        else: return name # return valid matrix name
+        else: 
+            if not bool(name): # check if matrix is empty
+                print("\n!!! Die Matrix darf nicht unbenannt sein !!!") 
+
+            else: return name # return valid matrix name
+
+        print("\nBite gebe einen anderen Namen ein:") 
 
 #--------------------InputNotExistingMatrix--------------------#
 def input_existing_matrix():
@@ -530,10 +535,10 @@ def add_matrix():
             os.system("cls")
             print(f"Das Ergebnis der Addition ist:\n{result}")
 
+            save_matrix(result) # try to save matrix
+
         else:
-            print("\n!!! Die Matrizen konnten nicht addiert werden,da sie nicht von gleicher Größe sind !!!\n")
-        
-        save_matrix(result) # try to save matrix
+            print("\n!!! Die Matrizen konnten nicht addiert werden, da sie nicht von gleicher Größe sind !!!\n")
 
         print("\nMöchtest du eine weitere Matrix addieren?(Y/N)") 
         if input(">") == "Y": pass # repeats add_matrix if Y
@@ -564,10 +569,11 @@ def sub_matrix():
             os.system("cls")
             print(f"Das Ergebnis der Subtraktion ist:\n{result}")
 
+            save_matrix(result) # try to save matrix
+
         else:
             print("\n!!! Die Matrizen konnten nicht subtrahiert werden,da sie nicht von gleicher Größe sind !!!\n")
         
-        save_matrix(result) # try to save matrix
             
         print("\nMöchtest du eine weitere Matrix subtrahieren?(Y/N)") 
         if input(">") == "Y": pass # repeats sub_matrix if Y
@@ -598,10 +604,11 @@ def mul_matrix():
             os.system("cls")
             print(f"Das Ergebnis der Multiplikation ist:\n{result}")
 
+            save_matrix(result) # try to save matrix
+
         else:
             print("\n!!! Die Matrizen konnten nicht muliplizert werden,\nda die Zeilen des ersten Faktores nicht mit den Spalten\ndes zweiten Faktors übereinstimmen (und andersherum) !!!\n")
 
-        save_matrix(result) # try to save matrix
 
         print("\nMöchtest du eine weitere Matrix multiplizieren?(Y/N)") 
         if input(">") == "Y": pass # repeats mul_matrix if Y
@@ -639,8 +646,7 @@ Wähle eine Nummer:""")
             if input(">") == "Y": break
             else: pass
         case _: pass
-
-        #TODO: Save Function for saving Matrix from addition
+        
         #TODO: (Scalar Multiplication)
         #TODO: transpone Matrix
         #TODO: calculate determin
