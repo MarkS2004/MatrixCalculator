@@ -86,8 +86,8 @@ class MatrixClass:
 
             result = MatrixClass(self._rows, self._columns)
 
-            for i in range (self._rows): # goes thru the rows of the matrices  
-                for j in range (self._columns): # goes thru the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the matrices  
+                for j in range (self._columns): # goes through the columns of the matrices
                     result._matrix[i][j] = self._matrix[i][j] + other._matrix[i][j] # adds the matrices
 
             return result
@@ -102,8 +102,8 @@ class MatrixClass:
 
             result = MatrixClass(self._rows, self._columns)
 
-            for i in range (self._rows): # goes thru the rows of the matrices  
-                for j in range (self._columns): # goes thru the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the matrices  
+                for j in range (self._columns): # goes through the columns of the matrices
                     result._matrix[i][j] = self._matrix[i][j] - other._matrix[i][j] # substracts the matrices
 
             return result
@@ -118,9 +118,9 @@ class MatrixClass:
              
             result = MatrixClass(self._rows, other._columns) # initialize result matrix
 
-            for i in range (self._rows): # goes thru the rows of the matrices 
-                for j in range (other._columns): # goes thru the columns of the matrices
-                    for k in range (self._columns): # goes thru the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the matrices 
+                for j in range (other._columns): # goes through the columns of the matrices
+                    for k in range (self._columns): # goes through the columns of the matrices
                         result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j]) # multiplicates the matrices
                     
             return result
@@ -128,18 +128,17 @@ class MatrixClass:
         else:
             raise ValueError("The Matrices are not the same size! They can not be mutiplicated!") # ValueErrror message
 
-#==========================EqMethod============================#
-    def __eq__(self, other):
-        if self._rows != other._rows and self._columns != other._columns: # checks if matrices are not the same size
-            return False
+#======================TransposeMethod=========================#
+    def transpose(self):
+
+        tempMat = MatrixClass(self._columns, self._rows) # tempory Matrix with switched dimensions
+
+        for i in range (self._columns): # goes through the rows of the matrices 
+            for j in range(self._rows): # goes through the columns of the matrices 
+                tempMat._matrix[i][j] = self._matrix[j][i]
         
-        for i in range(self._rows): # goes thru the rows of the Matrices  
-            for j in range(self._columns): # goes thru the columns of the Matrices
-                if self._matrix[i][j] != other._matrix[i][j]: # checks if the different elements in the matrices are not the same  
-                    return False
-        
-        return True # if everthing is identical, "True" will be returned 
-                    
+        return tempMat
+           
 ################################################################
 # Main Programm                                                #
 ################################################################
