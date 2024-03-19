@@ -380,7 +380,7 @@ def save_matrix(result):
                 print(f"\nDas Ergebnis wurde erfolreich in der Matrix: {name} gespeichert")
                 return #leaves the function
             else:
-                print(f"\n Die Matrix: {name} existiert bereits, möchtest du diese überschreiben?(Y/N)")
+                print(f"\nDie Matrix: {name} existiert bereits, möchtest du diese überschreiben?(Y/N)")
 
                 if input(">").strip() == "Y":
                     stored_matrices.update({name: result}) # replaces old Matrix with new one

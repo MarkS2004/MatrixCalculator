@@ -1,13 +1,26 @@
-Lieber Leser,
+# Matrizenrechner
 
-dieses Dokument ist eine Beilage zum Programm Code des Matrizenrechners, um diesen besser zu verstehen und nutzen zu können.
-Alle Funktionen des Programms werden im Sourcecode mithilfe von Kommentaren erklärt.
-Der Benutzer wird durch Textausgaben sicher durch das Programm geleitet.
+## Starten des Programms
+Zum Starten des Programms führen Sie bitte das "main.py"-Skript aus. Wir empfehlen das Programm in der Konsole und nicht in einer IDE auszuführen. Bitte stellen Sie sicher, dass die Python-Version 1.12.1 verwendet wird. (evtl. funktioniert es auch in anderen Versionen, wurde aber nicht getestet). Es benötigt keine  Installation von weiteren Modulen.
 
-Zum Starten des Programms muss das "main.py"-Skript ausgeführt werden. Das Programm verwendet die Pythonversion 1.12.1. 
-Nach dem Starten des Programms wird mithilfe eines Einführungstextes die grundlegende Idee des Rechners erklärt.
-Wird dann die Enter-Taste betätigt, gelangt der Benutzer in das Hauptmenü, von wo aus alle weiteren Operationen ausgewählt werden können. Diese werden durch Eingabe der beistehenden Nummer der Operation ausgewählt.
+## Bedienung des Programms
+Der Rechner an sich selbsterklärend, weswegen es keine ausführliche Erklärung benötigt. Bei fehlerhaften Eingaben wird der Nutzer darauf hingewiesen. Sollte er durch das Programm gezwungen werden eine Matrixeinzugeben, kann die „emergMat“-Matrix verwendet werden.
 
-An dem Programm sollten die grundlegenden Funktionen von Python erlernt werden, was dazu führte, dass sich bewusst gegen Module wie beispielsweise NumPy entschieden wurde. Zusätzlich wurde viel Wert darauf gelegt, dass das Programm DAU sicher ist. Das bedeutet, dass das Programm nicht durch unvorhergesehene Eingaben zum abstürzen gebracht werden kann.
+## Link zu GitHhb
+Link zu GitHub: https://github.com/MarkS2004/MatrixCalculator
+(Das Programm sollte öffentlich sein)
 
-Bei Fragen können sie sich gerne an unser Entwickler Team, bestehend aus Mark Schaab, Marvin Wolff und Kemal Bagci wenden. 
+## Hinweis zum Programmablaufplan
+Neben dem ausführlich kommentierten Programmcode wurde zum besseren Verständnis ein Programmablaufplan beigefügt. Dieses liegt einmal im PDF-Format vor und andererseits im PAP-Format. Wir empfehlen das Öffnen des PAP-Formats mittels des PAP-Designers von Simon-Frank-Ohm, da so die Navigation einfacher fällt.
+
+## Grundlegende Gedanken zum Programm
+Bei der Erstellung des Programms wurde vor allem darauf geachtet, dass das Programm bei "falschen" Nutzereingaben nicht zum Abstürzen gebracht wird. (Dau-sicher). Des Weiteren wollten wir beim Entwickeln des Matrizenrechners auf Module wie NumPy verzichten, da so der Lerneffekt größer ausfiel. Deshalb wurde eine eigenen Matrixklasse erstellt. (Siehe: "MatrixClass.py")
+
+## Bei Fragen
+Bei aufkommenden Problemen, Fehlern und Fragen können Sie uns unter der E-Mail-Adresse: mark_schaab@outlook.com erreichen.
+
+## Credits
+Das Programm wurde erstellt von:
+- Bagci, Kemal (Mart.Nr.: 9899273)
+- Schaab, Mark (Mart.Nr.: 6790654)
+- Wolff, Marvin (Mart.Nr.: 1853343)
