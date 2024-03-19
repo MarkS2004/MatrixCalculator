@@ -70,17 +70,17 @@ class MatrixClass:
     def __str__(self):
         """brief: ouput of matrix if represented as string"""
 
-        outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix
+        outputString = "\t┌" + "\t"*(self._columns + 1) + "┐\n" # upper part of matrix-representation
 
         for i in range(self._rows):
-            outputString += "\t│" # left part of matrix
+            outputString += "\t│" # left part of matrix-representation
 
             for j in range(self._columns):
                 outputString += f"\t{self._matrix[i][j]}" # field with elements
 
-            outputString += "\t│\n" # right part of matrix
+            outputString += "\t│\n" # right part of matrix-representation
 
-        outputString += "\t└" + "\t"*(self._columns + 1) + "┘"  # lower part of matrix
+        outputString += "\t└" + "\t"*(self._columns + 1) + "┘"  # lower part of matrix-representation
 
         return outputString
         
@@ -126,9 +126,10 @@ class MatrixClass:
              
             result = MatrixClass(self._rows, other._columns) # initialize result matrix
 
-            for i in range (self._rows): # goes through the rows of the matrices 
-                for j in range (other._columns): # goes through the columns of the matrices
-                    for k in range (self._columns): # goes through the columns of the matrices
+            for i in range (self._rows): # goes through the rows of the result-matrix
+                for j in range (other._columns): # goes through the columns of the result-matrix
+
+                    for k in range (self._columns): # goes through the columns/rows of the matrices
                         result._matrix[i][j] += (self._matrix[i][k] * other._matrix[k][j]) # multiplicates the matrices
                     
             return result
@@ -141,9 +142,9 @@ class MatrixClass:
 
         tempMat = MatrixClass(self._columns, self._rows) # tempory Matrix with switched dimensions
 
-        for i in range (self._columns): # goes through the rows of the matrices 
-            for j in range(self._rows): # goes through the columns of the matrices 
-                tempMat._matrix[i][j] = self._matrix[j][i]
+        for i in range (self._columns): # goes through the rows of the matrix 
+            for j in range(self._rows): # goes through the columns of the matrix 
+                tempMat._matrix[i][j] = self._matrix[j][i] # switches position
         
         return tempMat
            

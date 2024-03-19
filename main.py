@@ -43,10 +43,15 @@ def menu_welcome():
 
     os.system("cls") # clears screen
     print(
-"""Der folgende Matrizenrechener wurde von Marvin Wolff, Mark Schaab und Kemal Bagci
-im Rahmen der Informatikklausur am 21.03.2024 ertsellt.
-Der Rechner kann verschiedene Rechenoperationen durchführen.
-Diese werden im folgenden Hauptmenü zur Auswahl bereit gestellt.
+"""
+  __  __       _    _____      _      
+ |  \/  |     | |  / ____|    | |     
+ | \  / | __ _| |_| |     __ _| | ___ 
+ | |\/| |/ _` | __| |    / _` | |/ __|
+ | |  | | (_| | |_| |___| (_| | | (__ 
+ |_|  |_|\__,_|\__|\_____\__,_|_|\___|
+
+Wir wünschen viel Spaß beim Ausprobieren.
 
 Drücke Enter um ins Hauptmenü zu gelangen""")
     
@@ -54,7 +59,7 @@ Drücke Enter um ins Hauptmenü zu gelangen""")
 
 #--------------------VariableManagerMenu-----------------------#
 def submenu_variable_manager():
-    """brief: this functions prints the VariableManager and lets one navigate,
+    """brief: this function prints the variable-manager and lets one navigate,
     it ends if "0" is pressed"""
 
     while True:
@@ -83,7 +88,7 @@ Wähle eine Nummer:""")
 
 #--------------------OperationManagerMenu----------------------#
 def submenu_operation_manager():
-    """brief: this functions prints the OperationsManager and lets one navigate,
+    """brief: this function prints the operation-manager and lets one navigate,
     it ends if "0" is pressed"""
 
     while True:
@@ -111,7 +116,7 @@ Wähle eine Nummer:""")
             
 #---------------------InputExistingMatrix----------------------#
 def input_not_existing_matrix():
-    """brief: this functions inputs matrix name,
+    """brief: this function inputs matrix name,
     checks if matrix exists,
     returns valid matrix name"""
 
@@ -131,7 +136,7 @@ def input_not_existing_matrix():
 
 #--------------------InputNotExistingMatrix--------------------#
 def input_existing_matrix():
-    """brief: this functions inputs matrix name,
+    """brief: this function inputs matrix name,
     checks if matrix does not exist,
     returns valid matrix name"""
 
@@ -146,7 +151,7 @@ def input_existing_matrix():
 #-----------------------InputMatrixRows------------------------#
 def input_matrix_row(max_size):
     """brief: this function takes user input for row,
-    returns valid number for row"""
+    returns valid number for row (1<= row <= max_size)"""
 
     while True:
         row = input(">").strip()
@@ -164,8 +169,8 @@ def input_matrix_row(max_size):
 
 #----------------------InputMatrixColumn-----------------------#
 def input_matrix_column(max_size):
-    """brief: this function takes user input for columns,
-    returns valid number of columns"""
+    """brief: this function takes user input for column,
+    returns valid number of column (1<= column <= max_size)"""
 
     while True:
         column = input(">").strip()
@@ -314,7 +319,7 @@ def change_matrix_value():
 
 #-------------------------showMatrix---------------------------#
 def show_matrix():
-    """brief: this function lets the user see the value of a matrix"""
+    """brief: this function lets the user see a matrix"""
 
     while True:
         os.system("cls") # clears screen
@@ -331,7 +336,7 @@ def show_matrix():
 
 #----------------------printCreatedMatrices--------------------#
 def print_created_matrices():
-    """brief: this fuctions prints a list of all created functions"""
+    """brief: this fuction prints a list of all created matrices"""
 
     print("Folgende Matrizen wurden angelegt:")
     for i in stored_matrices.keys(): print(f"- {i}") # prints a list of all matrices
